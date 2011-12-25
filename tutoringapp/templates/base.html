@@ -1,8 +1,17 @@
 <html>
     <head>
-        <title></title>
+        <title>{% block title %}{{ title }}{% endblock title %}</title>
+        {% block extrastyle %}
+        {{ extrastyle }}
+        {% endblock extrastyle %}
     </head>
     <body>
+        {% block body %}
+        {{ body }}
+        {% endblock body %}
         test
     </body>
+    {% block extrascript %}
+    {{ extrascript }}
+    {% endblock extrascript %}
 </html>
