@@ -1,17 +1,27 @@
 <html>
     <head>
         <title>{% block title %}{{ title }}{% endblock title %}</title>
+        <link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/cssrules.css" />
         {% block extrastyle %}
         {{ extrastyle }}
         {% endblock extrastyle %}
     </head>
     <body>
-        {% block body %}
-        {{ body }}
-        {% endblock body %}
-        test
+        <div id="wrapper">
+            <div id="header">
+            LCS Tutoring Management system 
+            </div>
+            <div id="content">
+                {% block body %}
+                {{ body }}
+                {% endblock body %}
+                test
+            </div>
+        </div>
+        <script style="text/javascript" src="{{MEDIA_URL}}js/jquery-1.7.1.min.js">
+        </script>
+        {% block extrascript %}
+        {{ extrascript }}
+        {% endblock extrascript %}
     </body>
-    {% block extrascript %}
-    {{ extrascript }}
-    {% endblock extrascript %}
 </html>
