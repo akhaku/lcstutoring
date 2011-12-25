@@ -103,7 +103,9 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'tutoringapp.urls'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-        "util.context_processors.utility",
+        'django.contrib.auth.context_processors.auth',
+        'django.core.context_processors.debug',
+        'django.core.context_processors.media',
 )
 
 TEMPLATE_DIRS = (
@@ -121,7 +123,6 @@ INSTALLED_APPS = (
     'tutors',
     'gunicorn',
     'south',
-    'util',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
