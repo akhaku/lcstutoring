@@ -27,3 +27,15 @@ div#content {
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
 }
+
+.left { float: left; }
+.right { float: right; }
+.clearfix {clear: both; }
+
+.w100 { width: 100px; }
+
+form#login-form {
+    font-size: 20px;
+    margin-left: 50px;
+    margin-top: 50px;
+}

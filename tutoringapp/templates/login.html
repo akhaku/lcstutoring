@@ -1,8 +1,18 @@
 {% extends "base.html" %}
 {% block body %}
-<form action="{% url account.views.auth %}" method="post">
+<form action="{% url account.views.auth %}" method="post" id="login-form">
+    <div class="left w100">
+    <label for="username">Username</label>
+    <br/>
+    <label for="password">Password</label>
+    </div>
+    <div class="left w100">
     <input name="username" type="text" />
+    <br/>
     <input name="password" type="password" />
+    </div>
+    <div class="clearfix"></div>
+    <br/>
     {% csrf_token %}
     <input type="submit" />
 </form>
