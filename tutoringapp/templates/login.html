@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block body %}
+<form action="{% url account.views.auth %}" method="post">
+    <input name="username" type="text" />
+    <input name="password" type="password" />
+    {% csrf_token %}
+    <input type="submit" />
+</form>
+<br/>
+{% endblock body %}
