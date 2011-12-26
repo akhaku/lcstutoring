@@ -10,6 +10,11 @@
         <div id="wrapper">
             <div id="header">
             LCS Tutoring Management system 
+            {% if user.is_authenticated %}
+            <a href="{% url account.views.logout_page %}">
+                <button>Logout</button>
+            </a>
+            {% endif %}
             </div>
             <div id="content">
                 {% if messages %}
@@ -19,7 +24,6 @@
                     {% endfor %}
                 </ul>
                 {% endif %}
-                <h1>{{user.get_full_name}}</h1>
                 {% block body %}
                 {{ body }}
                 {% endblock body %}
