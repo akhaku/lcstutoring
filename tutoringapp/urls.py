@@ -1,15 +1,13 @@
 from django.conf import settings
-from django.conf.urls.defaults import patterns, include, url
-
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
-        (r'^$', 'landing.views.home'),
-        (r'^tutors/$', 'tutors.views.all_tutors'),
-        (r'^tutors/', include('tutoringapp.tutors.urls')),
+        url(r'^$', 'account.views.login_page'),
+        url(r'^accounts/', include('tutoringapp.account.urls') ),
+        url(r'^auth/$', 'account.views.auth'),
+        url(r'^tutors/$', 'tutors.views.all_tutors'),
+        url(r'^tutors/', include('tutoringapp.tutors.urls') ),
         # Serve static assets for dev
-        (r'^static/(?P<path>.*)$', 'django.views.static.serve',
+        url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': settings.MEDIA_ROOT}),
     )
