@@ -1,0 +1,83 @@
+{% load form_helpers %}
+<form action="{% url tutors.views.add_tutor %}" method="post" id="tutor-form">
+    {% if form.non_field_errors %}
+    <ul class="errorlist">{{ form.non_field_errors.as_ul }}</ul>
+    {% endif %}
+    <div class="w100 left">
+        <label for="first_name">First name</label> 
+    </div>
+    <div class="w250 left">
+        {{ form.first_name }}
+        {{ form.first_name.errors }}
+    </div>
+    <div class="w100 left">
+        <label for="last_name">Last name</label>
+    </div>
+    <div class="w250 left">
+        {{ form.last_name }}
+        {{ form.last_name.errors }}
+    </div>
+    <br/>
+    <div class="clearfix"></div>
+    <div class="w100 left">
+        <label for="phone_number">Phone</label> 
+    </div>
+    <div class="w250 left">
+        {{ form.phone_number }}
+        {{ form.phone_number.errors }}
+    </div>
+    <div class="w100 left">
+        <label for="email_address">Email</label>
+    </div>
+    <div class="w250 left">
+        {{ form.email_address }}
+        {{ form.email_address.errors }}
+    </div>
+    <br/>
+    <div class="clearfix"></div>
+    <div class="w100 left">
+        <label for="grad_year">Grad year</label>
+    </div>
+    <div class="w250 left">
+        {{ form.grad_year|size:"4"}}
+        {{ form.grad_year.errors }}
+    </div>
+    <div class="w100 left">
+        <label>Grade pref.</label>
+    </div>
+    <div class="w250 left">
+        {{ form.tutoring_preference_from }}
+        to 
+        {{ form.tutoring_preference_to }}
+        {% if form.tutoring_preference_from.errors or form.tutoring_preference_to.errors %}
+        {% if form.tutoring_preference_from.errors %}
+        {{ form.tutoring_preference_from.errors }}
+        {% else %}
+        {{ form.tutoring_preference_to.errors }}
+        {% endif %}
+
+        {% endif %}
+    </div>
+    <br/>
+    <div class="clearfix"></div>
+    <div class="w100 left">
+        <label for="subjects">Subjects</label>
+    </div>
+    <div class="w250 left">
+        {{ form.subjects }}
+        {{ form.subjects.errors }}
+    </div>
+    <br/>
+    <div class="clearfix"></div>
+    <div class="w100 left">
+        <label for="note">Extra Info</label>
+    </div>
+    <div class="w250 left">
+        {{ form.note }}
+    </div>
+    <br/>
+    <div class="clearfix"></div>
+
+    {% csrf_token %}
+    <input type="submit" />
+</form>

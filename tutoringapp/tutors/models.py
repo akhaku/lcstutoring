@@ -1,30 +1,21 @@
 from django.db import models
+from tmsutil.constants import YEAR_CHOICES
 
 class Tutor(models.Model):
     """ The base class for a tutor
     """
 
-    _year_choices = (('1','1'),
-            ('2','2'),
-            ('3','3'),
-            ('4','4'),
-            ('5','5'),
-            ('6','6'),
-            ('7','7'),
-            ('8','8'),
-            ('9','9'),
-            ('10','10'),
-            ('11','11'),
-            ('12','12'))
 
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email_address = models.EmailField(max_length=75)
-    phone_number = models.CharField(max_length=15)
-    grad_year = models.IntegerField(max_length=4)
+    first_name = models.CharField(max_length=50, help_text="John")
+    last_name = models.CharField(max_length=50, help_text="Smith")
+    email_address = models.EmailField(max_length=75,
+            help_text="johnsmith@example.com")
+    phone_number = models.CharField(max_length=15, help_text="987-654-3210")
+    grad_year = models.IntegerField(max_length=4, help_text="2012")
     tutoring_preference_from = models.IntegerField(max_length=2,
-            choices=_year_choices)
+            choices=YEAR_CHOICES)
     tutoring_preference_to = models.IntegerField(max_length=2,
-            choices=_year_choices)
-    subjects = models.CharField(max_length=50)
-    note = models.TextField(blank=True)
+            choices=YEAR_CHOICES)
+    subjects = models.CharField(max_length=50, help_text="Math, Reading, Writing")
+    note = models.TextField(blank=True,
+            help_text="Any extra information you would like us to know?")
