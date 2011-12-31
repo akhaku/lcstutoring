@@ -13,7 +13,7 @@ class Migration(SchemaMigration):
 
         # Changing field 'Tutee.grade'
         db.delete_column('tutees_tutee', 'grade')
-        db.add_column('tutees_tutee', 'grade', self.gf('django.db.models.fields.IntegerField')(max_length=2)(default=0), keep_default=False)
+        db.add_column('tutees_tutee', 'grade', self.gf('django.db.models.fields.IntegerField')(max_length=2),(default=0), keep_default=False)
 
 
     def backwards(self, orm):
