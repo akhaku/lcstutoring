@@ -33,14 +33,12 @@ class TutorForm(TmsModelForm):
 
     def clean_grad_year(self):
         val = int(self.cleaned_data.get('grad_year'))
-
         if val < 2010 or val > 2030:
             raise ValidationError("Must be a valid graduation year eg: 2014")
         return val
 
     def clean_tutoring_preference_from(self):
         pref_from = int(self.cleaned_data.get('tutoring_preference_from'))
-        self.cleaned_data['tutoring_preference_to'] = pref_from
         if not pref_from in self._year_choices:
             raise ValidationError("Value %s invalid" % pref_from)
         return pref_from
@@ -49,7 +47,6 @@ class TutorForm(TmsModelForm):
         pref_to = int(self.cleaned_data.get('tutoring_preference_to'))
         if not pref_to in self._year_choices:
             raise ValidationError("Value %s invalid" % pref_to)
-        self.cleaned_data['tutoring_preference_to'] = pref_to
         pref_from = self.cleaned_data.get('tutoring_preference_from')
         if pref_to < pref_from:
             raise ValidationError("Please enter a valid tutoring preference")

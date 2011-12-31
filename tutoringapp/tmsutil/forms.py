@@ -1,4 +1,3 @@
-import logging
 from django.forms import ModelForm
 from django.forms.widgets import TextInput, Textarea
 from django.forms.util import ErrorList

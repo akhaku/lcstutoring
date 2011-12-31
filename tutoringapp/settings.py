@@ -111,6 +111,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'account',
+    'tutees',
     'tutors',
     'gunicorn',
     'south',

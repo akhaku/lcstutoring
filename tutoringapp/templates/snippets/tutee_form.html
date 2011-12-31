@@ -1,0 +1,107 @@
+<form action="{% url tutees.views.add_tutee %}" method="post" id="tutee-form">
+    {% if form.non_field_errors %}
+    <ul class="errorlist">{{ form.non_field_errors.as_ul }}</ul>
+    {% endif %}
+    <br/>
+    <br/>
+    <div>Parent</div>
+    <div class="w100 left">
+        <label for="parent_first_name">First name</label> 
+    </div>
+    <div class="w250 left">
+        {{ form.parent_first_name }}
+        {{ form.parent_first_name.errors }}
+    </div>
+    <div class="w100 left">
+        <label for="parent_last_name">Last name</label>
+    </div>
+    <div class="w250 left">
+        {{ form.parent_last_name }}
+        {{ form.parent_last_name.errors }}
+    </div>
+    <br/>
+    <div class="clearfix"></div>
+
+    <div class="w100 left">
+        <label for="home_phone_number">Home phone</label> 
+    </div>
+    <div class="w250 left">
+        {{ form.home_phone_number }}
+        {{ form.home_phone_number.errors }}
+    </div>
+    <div class="w100 left">
+        <label for="cell_phone_number">Cell phone</label>
+    </div>
+    <div class="w250 left">
+        {{ form.cell_phone_number }}
+        {{ form.cell_phone_number.errors }}
+    </div>
+    <br/>
+    <div class="clearfix"></div>
+
+    <div class="w100 left">
+        <label for="email_address">Email</label>
+    </div>
+    <div class="w250 left">
+        {{ form.email_address }}
+        {{ form.email_address.errors }}
+    </div>
+    <br/>
+    <div class="clearfix"></div>
+
+    <br/>
+    <div>Child</div>
+    <div class="w100 left">
+        <label for="child_first_name">First name</label> 
+    </div>
+    <div class="w250 left">
+        {{ form.child_first_name }}
+        {{ form.child_first_name.errors }}
+    </div>
+    <div class="w100 left">
+        <label for="child_last_name">Last name</label>
+    </div>
+    <div class="w250 left">
+        {{ form.child_last_name }}
+        {{ form.child_last_name.errors }}
+    </div>
+    <br/>
+    <div class="clearfix"></div>
+
+    <div class="w100 left">
+        <label for="grade">Grade</label> 
+    </div>
+    <div class="w250 left">
+        {{ form.grade }}
+        {{ form.grade.errors }}
+    </div>
+    <div class="w100 left">
+        <label for="gender">Gender</label>
+    </div>
+    <div class="w250 left">
+        {{ form.gender }}
+        {{ form.gender.errors }}
+    </div>
+    <br/>
+    <div class="clearfix"></div>
+
+    <div class="w100 left">
+        <label for="subjects">Tutoring in</label>
+    </div>
+    <div class="w250 left">
+        {{ form.subjects }}
+        {{ form.subjects.errors }}
+    </div>
+    <br/>
+    <div class="clearfix"></div>
+    <div class="w100 left">
+        <label for="note">Extra Info</label>
+    </div>
+    <div class="w250 left">
+        {{ form.note }}
+    </div>
+    <br/>
+    <div class="clearfix"></div>
+    {% csrf_token %}
+    <input type="submit" />
+</form>
