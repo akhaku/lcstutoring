@@ -59,7 +59,7 @@ class TuteeForm(TmsModelForm):
         return name.title()
 
     def clean_gender(self):
-        gender = int(self.cleaned_data.get('gender'))
+        gender = str(self.cleaned_data.get('gender'))
         if not gender in self._gender_choices:
             raise ValidationError("Value %s invalid" % gender)
         return gender
