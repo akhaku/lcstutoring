@@ -1,10 +1,11 @@
 from django.forms import ValidationError
-from tutors.models import Tutor
+from tutor.models import Tutor
 from tmsutil.constants import YEAR_CHOICES
 from tmsutil.forms import TmsModelForm
 
 class TutorForm(TmsModelForm):
     _year_choices = [val[0] for val in YEAR_CHOICES]
+    exclude = ('added_on', 'active',)
 
     class Meta:
         model = Tutor

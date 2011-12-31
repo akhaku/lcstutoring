@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block body %}
-this is the body for all_tutors
-{{ MEDIA_URL }}
+<table>
+{% for tutor in tutors %}
+{% include "snippets/tutor_row.html" %}
+{% endfor %}
+</table>
 {% endblock %}

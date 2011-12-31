@@ -21,3 +21,9 @@ class Tutee(models.Model):
     note = models.TextField(blank=True,
             help_text="Any extra information you would like us to know?")
 
+    def get_child_full_name(self):
+        return "%s %s" % (self.child_first_name, self.child_last_name)
+
+    def get_parent_full_name(self):
+        return "%s %s" % (self.parent_first_name, self.parent_last_name)
+

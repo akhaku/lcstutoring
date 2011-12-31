@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 from tmsutil.constants import YEAR_CHOICES
 
@@ -15,5 +16,16 @@ class Tutor(models.Model):
     tutoring_preference_from = models.IntegerField(max_length=2, choices=YEAR_CHOICES)
     tutoring_preference_to = models.IntegerField(max_length=2, choices=YEAR_CHOICES)
     subjects = models.CharField(max_length=50, help_text="Math, Reading, Writing")
+    added_on = models.DateTimeField(blank=True)
+    active = models.BooleanField(default=True)
     note = models.TextField(blank=True,
             help_text="Any extra information you would like us to know?")
+
+    def get_full_name(self):
+        return "%s %s" % (self.first_name, self.last_name)
+
+    def get_tutoring_pref(self):
+        return "%s-%s" % (self.tutoring_preference_from, self.tutoring_preference_to)
+
+    def get_edit_url(self):
+        return reverse('tutors.views.edit_tutor', args=[self.id])
