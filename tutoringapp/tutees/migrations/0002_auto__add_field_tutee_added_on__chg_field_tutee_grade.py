@@ -12,16 +12,14 @@ class Migration(SchemaMigration):
         db.add_column('tutees_tutee', 'added_on', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2011, 12, 31, 3, 56, 24, 826155), blank=True), keep_default=False)
 
         # Changing field 'Tutee.grade'
-        db.alter_column('tutees_tutee', 'grade', self.gf('django.db.models.fields.IntegerField')(max_length=2))
+        db.delete_column('tutees_tutee', 'grade')
+        db.add_column('tutees_tutee', 'grade', self.gf('django.db.models.fields.IntegerField')(max_length=2))
 
 
     def backwards(self, orm):
         
         # Deleting field 'Tutee.added_on'
         db.delete_column('tutees_tutee', 'added_on')
-
-        # Changing field 'Tutee.grade'
-        db.alter_column('tutees_tutee', 'grade', self.gf('django.db.models.fields.CharField')(max_length=2))
 
 
     models = {
