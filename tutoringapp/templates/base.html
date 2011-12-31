@@ -16,6 +16,13 @@
             </a>
             {% endif %}
             </div>
+            {% if user.is_authenticated %}
+            <div id="nav">
+                <a href="{% url tutors.views.all_tutors %}">Tutors</a>
+                <a href="{% url tutees.views.all_tutees %}">Tutees</a>
+                <a href="{% url match.views.all_matches %}">Matches</a>
+            </div>
+            {% endif %}
             <div id="content">
                 {% if messages %}
                 <ul class="messages">
