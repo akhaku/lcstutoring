@@ -11,10 +11,6 @@ class Migration(SchemaMigration):
         # Adding field 'Tutee.added_on'
         db.add_column('tutees_tutee', 'added_on', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2011, 12, 31, 3, 56, 24, 826155), blank=True), keep_default=False)
 
-        # Changing field 'Tutee.grade'
-        db.delete_column('tutees_tutee', 'grade')
-        db.add_column('tutees_tutee', 'grade', self.gf('django.db.models.fields.IntegerField')(max_length=2),(default=0), keep_default=False)
-
 
     def backwards(self, orm):
         

@@ -19,7 +19,7 @@ class Migration(SchemaMigration):
             ('email_address', self.gf('django.db.models.fields.EmailField')(max_length=75, blank=True)),
             ('home_phone_number', self.gf('django.db.models.fields.CharField')(max_length=15, blank=True)),
             ('cell_phone_number', self.gf('django.db.models.fields.CharField')(max_length=15, blank=True)),
-            ('grade', self.gf('django.db.models.fields.CharField')(max_length=2)),
+            ('grade', self.gf('django.db.models.fields.IntegerField')(max_length=2)),
             ('subjects', self.gf('django.db.models.fields.CharField')(max_length=50)),
             ('note', self.gf('django.db.models.fields.TextField')(blank=True)),
         ))
@@ -40,7 +40,7 @@ class Migration(SchemaMigration):
             'child_last_name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'email_address': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'gender': ('django.db.models.fields.CharField', [], {'max_length': '6'}),
-            'grade': ('django.db.models.fields.CharField', [], {'max_length': '2'}),
+            'grade': ('django.db.models.fields.IntegerField', [], {'max_length': '2'}),
             'home_phone_number': ('django.db.models.fields.CharField', [], {'max_length': '15', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'note': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
