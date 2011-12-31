@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 from tmsutil.constants import YEAR_CHOICES
 
@@ -18,6 +19,8 @@ class Tutee(models.Model):
             help_text="987-654-3210")
     grade = models.IntegerField(max_length=2, choices = YEAR_CHOICES)
     subjects = models.CharField(max_length=50, help_text="Math, Reading, Writing")
+    added_on = models.DateTimeField(blank=True)
+    active = models.BooleanField(default=True)
     note = models.TextField(blank=True,
             help_text="Any extra information you would like us to know?")
 
@@ -27,3 +30,5 @@ class Tutee(models.Model):
     def get_parent_full_name(self):
         return "%s %s" % (self.parent_first_name, self.parent_last_name)
 
+    def get_edit_url(self):
+        return reverse('tutees.views.edit_tutee', args=[self.id])
