@@ -24,7 +24,7 @@ class TuteeForm(TmsModelForm):
         phone = phone.lstrip('1')
         if len(phone) != 10:
             raise ValidationError("Please enter a valid phone number")
-        return phone
+        return "%s-%s-%s" % (phone[0:3], phone[3:6], phone[6:10])
 
     def clean_home_phone_number(self):
         phone = self.cleaned_data.get('home_phone_number')
@@ -40,7 +40,7 @@ class TuteeForm(TmsModelForm):
         phone = phone.lstrip('1')
         if len(phone) != 10:
             raise ValidationError("Please enter a valid phone number")
-        return phone
+        return "%s-%s-%s" % (phone[0:3], phone[3:6], phone[6:10])
 
     def clean_parent_first_name(self):
         name = self.cleaned_data.get('parent_first_name')

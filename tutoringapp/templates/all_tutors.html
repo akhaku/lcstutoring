@@ -1,8 +1,20 @@
 {% extends "base.html" %}
 {% block body %}
 <table>
-{% for tutor in tutors %}
-{% include "snippets/tutor_row.html" %}
-{% endfor %}
+    <thead>
+        <th>&nbsp;</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Year</th>
+        <th>Pref</th>
+        <th>Subjects</th>
+        <th>Added on</th>
+    </thead>
+    <tbody>
+        {% for tutor in tutors %}
+        {% include "snippets/tutor_row.html" %}
+        {% endfor %}
+    </tbody>
 </table>
 {% endblock %}

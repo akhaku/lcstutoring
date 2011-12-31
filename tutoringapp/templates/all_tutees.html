@@ -1,8 +1,24 @@
 {% extends "base.html" %}
 {% block body %}
 <table>
-{% for tutee in tutees %}
-{% include "snippets/tutee_row.html" %}
-{% endfor %}
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>Name</th>
+            <th>Parent</th>
+            <th>Home</th>
+            <th>Cell</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Grade</th>
+            <th>Subjects</th>
+            <th>Add on</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tutee in tutees %}
+        {% include "snippets/tutee_row.html" %}
+        {% endfor %}
+    </tbody>
 </table>
 {% endblock %}

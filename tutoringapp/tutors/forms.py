@@ -30,7 +30,8 @@ class TutorForm(TmsModelForm):
         phone = phone.lstrip('1')
         if len(phone) != 10:
             raise ValidationError("Please enter a valid phone number")
-        return phone
+
+        return "%s-%s-%s" % (phone[0:3], phone[3:6], phone[6:10])
 
     def clean_grad_year(self):
         val = int(self.cleaned_data.get('grad_year'))
