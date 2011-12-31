@@ -1,5 +1,5 @@
 from django.forms import ValidationError
-from tutee.models import Tutee
+from tutees.models import Tutee
 from tmsutil.constants import YEAR_CHOICES
 from tmsutil.forms import TmsModelForm
 

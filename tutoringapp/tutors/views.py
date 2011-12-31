@@ -5,8 +5,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from tutor.forms import TutorForm
-from tutor.models import Tutor
+from tutors.forms import TutorForm
+from tutors.models import Tutor
 
 def register(request):
     regform = TutorForm
