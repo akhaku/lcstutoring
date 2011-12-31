@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from tutee.models import Tutee
-from tutor.models import Tutor
+from tutees.models import Tutee
+from tutors.models import Tutor
 from tmsutil.constants import DAY_CHOICES, MATCH_LOCATION_CHOICES
 
 class Match(models.Model):
