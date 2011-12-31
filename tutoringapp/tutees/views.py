@@ -19,6 +19,7 @@ def add_tutee(request):
     if form.is_valid():
         tutee = form.save(commit=False)
         tutee.added_on = datetime.now()
+        tutee.active = True
         tutee.save()
         messages.success(request, "Tutee successfully added")
         return HttpResponseRedirect(reverse('tutees.views.register',args=[]))

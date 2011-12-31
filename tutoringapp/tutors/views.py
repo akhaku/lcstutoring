@@ -19,6 +19,7 @@ def add_tutor(request):
     if form.is_valid():
         tutor = form.save(commit=False)
         tutor.added_on = datetime.now()
+        tutor.active = True
         tutor.save()
         messages.success(request, "Tutor successfully added")
         return HttpResponseRedirect(reverse('tutors.views.register',args=[]))
