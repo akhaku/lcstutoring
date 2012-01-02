@@ -1,5 +1,6 @@
 # Django settings for tutoringapp project.
 import os 
+from captcha_settings import *
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
@@ -110,7 +111,9 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'PIL',
     'account',
+    'captcha',
     'tutees',
     'tutors',
     'match',

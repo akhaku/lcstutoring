@@ -6,7 +6,6 @@ class Tutor(models.Model):
     """ The base class for a tutor
     """
 
-
     first_name = models.CharField(max_length=50, help_text="John")
     last_name = models.CharField(max_length=50, help_text="Smith")
     email_address = models.EmailField(max_length=75,
@@ -15,7 +14,7 @@ class Tutor(models.Model):
     grad_year = models.IntegerField(max_length=4, help_text="2012")
     tutoring_preference_from = models.IntegerField(max_length=2, choices=YEAR_CHOICES)
     tutoring_preference_to = models.IntegerField(max_length=2, choices=YEAR_CHOICES)
-    subjects = models.CharField(max_length=50, help_text="Math, Reading, Writing")
+    subjects = models.CharField(max_length=50, help_text="Math, reading, spanish")
     added_on = models.DateTimeField(blank=True)
     active = models.BooleanField(default=True)
     note = models.TextField(blank=True,

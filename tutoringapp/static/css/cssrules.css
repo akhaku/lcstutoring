@@ -1,8 +1,18 @@
-html, body {margin: 0px; padding: 0px;}
+html, body {margin: 0px; padding: 0px; height: 100%; }
+
+@font-face {
+    font-family: Dax-Regular;
+    src:url('../fonts/Dax-Regular.ttf');
+}
+
+@font-face {
+    font-family: "Alte Haas Grotesk";
+    src:url('../fonts/AlteHaasGroteskBold.ttf');
+}
 
 body {
     font-family: Helvetica, Arial;
-    background-color: black;
+    background-color: #0A0A2A;
     font-size: 17px;
 }
 
@@ -10,12 +20,24 @@ div#wrapper {
     width: 960px;
     margin-left: auto;
     margin-right: auto;
-    background-color: white;
+    background-color: #E3F6CE;
+    min-height: 100%;
+    -moz-box-shadow: 0px 10px 20px #088A85;
+    -webkit-box-shadow: 0px 10px 20px #088A85;
+    box-shadow: 0px 10px 15px #088A85;
 }
 
 div#header {
     font-size: 35px;
-    padding-left: 50px;
+    font-family: "Alte Haas Grotesk";
+    padding: 20px 0px 20px 0px;
+    text-align: center;
+    background-color: #071907;
+    color: #CEF6CE;
+    letter-spacing: 3px;
+    -moz-box-shadow: 0px 10px 20px #088A85;
+    -webkit-box-shadow: 0px 10px 20px #088A85;
+    box-shadow: 0px 1px 20px #088A85;
 }
 
 div#content {
@@ -41,19 +63,67 @@ form#login-form {
     margin-top: 50px;
 }
 
-form#tutor-form ul{
+form.tut-form {
+    color: #0A0A2A;
+    padding-left: 80px;
+    font-size: 18px;
+    font-family: Dax-Regular;
+}
+
+form.tut-form input, form.tut-form textarea {
+    font-size: 15px;
+    padding: 2px;
+    border-radius: 5px;
+    font-family: Helvetica, Arial;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+form.tut-form input[type=submit] {
+    font-size: 20px;
+    padding: 5px;
+    background-color: #0B0B3B;
+    color: #FFFFFF;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    position: relative;
+    left: 100px;
+    top: 10px;
+}
+
+form.tut-form ul{
     list-style-type: none;
+}
+
+div.tutee-form-fieldset {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    border-bottom: 2px dashed #58FA82;
+    width: 700px;
 }
 
 ul.messages {
     list-style-type: none;
-    border: 2px solid #000000;
-    font-size: 12px;
-    padding: 5px;
     width: 700px;
     margin-left: auto;
     margin-right: auto;
+    padding: 0px;
 }
 
-ul.errorlist { list-style-type: none; margin: 0px; padding: 0px; }
-ul.errorlist li { float: left; font-size: 12px; }
+ul.messages li {
+    border: 2px solid #FFF;
+    margin: 5px;
+    font-size: 15px;
+    padding: 10px;
+    color: #FFFFFF;
+    border-radius: 7px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+}
+
+ul.messages li.error { background-color: #B40404; }
+ul.messages li.success { background-color: #21610B; }
+
+ul.errorlist { list-style-type: none; margin: 0px 0px 20px 0px; padding: 0px; }
+ul.errorlist li { float: left; font-size: 12px; color: #8A0808; }

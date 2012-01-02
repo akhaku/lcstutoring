@@ -9,25 +9,23 @@ from tutees.forms import TuteeForm
 from tutees.models import Tutee
 
 def register(request):
-    form = TuteeForm
-    return render_to_response('register_tutee.html', {
-        'form':form
-        }, context_instance=RequestContext(request))
-
-def add_tutee(request):
-    form = TuteeForm(data=request.POST)
-    if form.is_valid():
-        tutee = form.save(commit=False)
-        tutee.added_on = datetime.now()
-        tutee.active = True
-        tutee.save()
-        messages.success(request, "Tutee successfully added")
-        return HttpResponseRedirect(reverse('tutees.views.register',args=[]))
+    if request.method == "POST":
+        form = TuteeForm(data=request.POST)
+        if form.is_valid():
+            tutee = form.save(commit=False)
+            tutee.added_on = datetime.now()
+            tutee.active = True
+            tutee.save()
+            messages.success(request, "Tutee successfully added.")
+            return HttpResponseRedirect(reverse('tutees.views.register',args=[]))
+        else:
+            messages.error(request, "Error adding tutee, please see errors below.")
     else:
-        messages.error(request, "Error adding tutee, please see errors below")
-    return render_to_response('register_tutee.html',
-            {'form': form },
-        context_instance=RequestContext(request))
+        form = TuteeForm
+    return render_to_response('register_tutee.html', {
+        'form':form,
+        'tutor_or_tutee': 'Tutee',
+        }, context_instance=RequestContext(request))
 
 @login_required
 def all_tutees(request):

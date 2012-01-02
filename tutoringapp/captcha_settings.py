@@ -1,0 +1,4 @@
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
+CAPTCHA_LETTER_ROTATION = (-5, 5)
+CAPTCHA_NOISE_FUNCTIONS = ()
+

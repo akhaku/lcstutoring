@@ -18,7 +18,7 @@ class Tutee(models.Model):
     cell_phone_number = models.CharField(max_length=15, blank=True,
             help_text="987-654-3210")
     grade = models.IntegerField(max_length=2, choices = YEAR_CHOICES)
-    subjects = models.CharField(max_length=50, help_text="Math, Reading, Writing")
+    subjects = models.CharField(max_length=50, help_text="Math, reading, writing")
     added_on = models.DateTimeField(blank=True)
     active = models.BooleanField(default=True)
     note = models.TextField(blank=True,
