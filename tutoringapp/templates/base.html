@@ -9,11 +9,11 @@
     <body>
         <div id="wrapper">
             <div id="header">
-                LCS Tutoring
-                {% if user.is_authenticated %}
-                Management System
-                {% else %} -
-                {{ tutor_or_tutee }} Registration
+                {% if tutor_or_tutee %}
+                <img src="{{MEDIA_URL}}/img/{{tutor_or_tutee}}-reg-header.jpg" 
+                alt="{{tutor_or_tutee}}" />
+                {% else %}
+                LCS Tutoring Management System
                 {% endif %}
             {% if user.is_authenticated %}
             <a href="{% url account.views.logout_page %}">

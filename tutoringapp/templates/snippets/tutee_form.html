@@ -1,3 +1,4 @@
+{% load form_helpers %}
 <form action="{% url tutees.views.register %}" class="tut-form" method="post" id="tutee-form">
     {% if form.non_field_errors %}
     <ul class="errorlist">{{ form.non_field_errors.as_ul }}</ul>
@@ -47,7 +48,6 @@
     <br/>
     <div class="clearfix"></div>
 
-    <br/>
     <div class="tutee-form-fieldset">Child information</div>
     <div class="w100 left">
         <label for="child_first_name">First name</label> 
@@ -96,12 +96,10 @@
         <label for="note">Extra Info</label>
     </div>
     <div class="w250 left">
-        {{ form.note }}
+        {{ form.note|rows:"5" }}
     </div>
-    <br/>
     <div class="clearfix"></div>
     {% csrf_token %}
     <input type="submit" />
-    <br/>
     <div class="clearfix"></div>
 </form>

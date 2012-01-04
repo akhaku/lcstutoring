@@ -1,4 +1,5 @@
 {% load form_helpers %}
+<br/>
 <form action="{% url tutors.views.register %}" class="tut-form" method="post" id="tutor-form">
     {% if form.non_field_errors %}
     <ul class="errorlist">{{ form.non_field_errors.as_ul }}</ul>
@@ -73,7 +74,7 @@
         <label for="note">Extra Info</label>
     </div>
     <div class="w250 left">
-        {{ form.note }}
+        {{ form.note|rows:"5" }}
     </div>
     <br/>
     <div class="clearfix"></div>
@@ -81,7 +82,7 @@
         Please enter the characters
     </div>
     <div class="w250 left">
-        {{ form.captcha }}
+        {{ form.captcha|size:"4" }}
         {{ form.captcha.errors }}
     </div>
     {% csrf_token %}

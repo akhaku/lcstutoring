@@ -24,7 +24,7 @@ def register(request):
         form = TutorForm
     return render_to_response('register_tutor.html', {
         'form':form,
-        'tutor_or_tutee': 'Tutor',
+        'tutor_or_tutee': 'tutor',
         }, context_instance=RequestContext(request))
 
 @login_required
