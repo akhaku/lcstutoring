@@ -32,3 +32,10 @@ class Tutee(models.Model):
 
     def get_edit_url(self):
         return reverse('tutees.views.edit_tutee', args=[self.id])
+
+    def get_grade(self):
+        grade = self.grade
+        if grade == 0:
+            grade = 'K'
+        return grade
+

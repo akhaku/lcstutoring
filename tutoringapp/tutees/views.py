@@ -34,6 +34,12 @@ def all_tutees(request):
         'tutees': tutees
         }, context_instance=RequestContext(request))
 
+def tutees_json(request):
+    all_tutees = Tutee.objects.filter(active=True).order_by('-added_on')
+    return render_to_response('tutees_ajax.html', {
+        'tutees': all_tutees,
+        }, context_instance=RequestContext(request))
+
 @login_required
 def edit_tutee(request, tutee_id):
     tutee = get_object_or_404(Tutee, id=tutee_id)

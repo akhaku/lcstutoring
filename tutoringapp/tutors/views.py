@@ -2,11 +2,13 @@ from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.core.serializers import serialize
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from tutors.forms import TutorForm
 from tutors.models import Tutor
+import logging
 
 def register(request):
     if request.method == "POST":
@@ -31,6 +33,13 @@ def register(request):
 def all_tutors(request):
     all_tutors = Tutor.objects.filter(active=True).order_by('-added_on')
     return render_to_response('all_tutors.html', {
+        'tutors': all_tutors,
+        }, context_instance=RequestContext(request))
+
+@login_required
+def tutors_json(request):
+    all_tutors = Tutor.objects.filter(active=True).order_by('-added_on')
+    return render_to_response('tutors_ajax.html', {
         'tutors': all_tutors,
         }, context_instance=RequestContext(request))
 

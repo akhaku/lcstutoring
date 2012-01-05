@@ -5,11 +5,6 @@ html, body {margin: 0px; padding: 0px; height: 100%; }
     src:url('../fonts/Dax-Regular.ttf');
 }
 
-@font-face {
-    font-family: "Alte Haas Grotesk";
-    src:url('../fonts/AlteHaasGroteskBold.ttf');
-}
-
 body {
     font-family: Helvetica, Arial;
     background-color: #0A0A2A;
@@ -27,10 +22,8 @@ div#wrapper {
 div#header {
     font-size: 35px;
     font-family: Dax-Regular;
-    /*padding: 20px 0px 20px 0px;*/
     text-align: center;
     background-color: #FFFFFF;
-    /*background-color: #071907;*/
     color: #CEF6CE;
     border-bottom: 2px dashed black;
     letter-spacing: 3px;
@@ -112,6 +105,18 @@ div.tutee-form-fieldset {
     margin-bottom: 5px;
     border-bottom: 2px dashed #000000;
     width: 650px;
+}
+
+table.data {
+    width: 100%;
+}
+
+table.data th {
+    cursor: pointer; 
+}
+
+table.data td {
+    font-size: 12px;
 }
 
 ul.messages {

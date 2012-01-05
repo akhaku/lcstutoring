@@ -1,9 +1,8 @@
 {% extends "base.html" %}
 {% block body %}
-<table>
+<table id="tutees" class="data">
     <thead>
         <tr>
-            <th>&nbsp;</th>
             <th>Name</th>
             <th>Parent</th>
             <th>Home</th>
@@ -16,9 +15,23 @@
         </tr>
     </thead>
     <tbody>
-        {% for tutee in tutees %}
-        {% include "snippets/tutee_row.html" %}
-        {% endfor %}
     </tbody>
 </table>
 {% endblock %}
+
+{% block extrascript %}
+<script type="text/javascript"
+    src="{{MEDIA_URL}}plugins/datatables/js/jquery.dataTables.min.js">
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+            $('table#tutees').dataTable({
+                "bProcessing": true,
+                "sAjaxSource": "{% url tutees.views.tutees_json %}"
+            });
+    });
+</script>
+{% endblock extrascript %}
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/datatables/css/demo_table.css" />
+{% endblock extrastyle %}

@@ -1,20 +1,35 @@
 {% extends "base.html" %}
 {% block body %}
-<table>
+<table id="tutors" class="data">
     <thead>
-        <th>&nbsp;</th>
-        <th>Name</th>
-        <th>Phone</th>
-        <th>Email</th>
-        <th>Year</th>
-        <th>Pref</th>
-        <th>Subjects</th>
-        <th>Added on</th>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Year</th>
+            <th>Pref</th>
+            <th>Subjects</th>
+            <th>Added on</th>
+        </tr>
     </thead>
     <tbody>
-        {% for tutor in tutors %}
-        {% include "snippets/tutor_row.html" %}
-        {% endfor %}
     </tbody>
 </table>
 {% endblock %}
+
+{% block extrascript %}
+<script type="text/javascript"
+    src="{{MEDIA_URL}}plugins/datatables/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+                $('table#tutors').dataTable({
+                    "bProcessing": true,
+                    "sAjaxSource": "{% url tutors.views.tutors_json %}"
+                });
+            });
+</script>
+{% endblock extrascript %}
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/datatables/css/demo_table.css" />
+{% endblock extrastyle %}
