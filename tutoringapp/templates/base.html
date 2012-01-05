@@ -23,11 +23,18 @@
             {% endif %}
             </div>
             {% if user.is_authenticated %}
-            <div id="nav">
-                <a href="{% url tutors.views.all_tutors %}">Tutors</a>
-                <a href="{% url tutees.views.all_tutees %}">Tutees</a>
-                <a href="{% url match.views.all_matches %}">Matches</a>
-            </div>
+            <ul id="nav">
+                <li>
+                    <a href="{% url tutors.views.all_tutors %}">Tutors</a>
+                </li>
+                <li>
+                    <a href="{% url tutees.views.all_tutees %}">Tutees</a>
+                </li>
+                <li>
+                    <a href="{% url match.views.all_matches %}">Matches</a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
             {% endif %}
             <div id="content">
                 {% if messages %}
@@ -42,7 +49,11 @@
                 {% endblock body %}
             </div>
         </div>
-        <script style="text/javascript" src="{{MEDIA_URL}}js/jquery-1.7.1.min.js">
+        <script type="text/javascript" src="{{MEDIA_URL}}js/jquery-1.7.1.min.js">
+        </script>
+        <script type="text/javascript" src="{{MEDIA_URL}}js/jquery-ui-1.8.16.custom.min.js">
+        </script>
+        <script type="text/javascript" src="{{MEDIA_URL}}js/script.js">
         </script>
         {% block extrascript %}
         {{ extrascript }}

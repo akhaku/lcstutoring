@@ -1,7 +1,15 @@
 { 
     "aaData": [
 {% for tutee in tutees %}
-{% include "snippets/tutee_ajax.html" %}
+["{{tutee.get_child_full_name|escape}}",
+"{{tutee.get_parent_full_name|escape}}",
+"{{tutee.home_phone_number|escape}}",
+"{{tutee.cell_phone_number|escape}}",
+"{{tutee.email_address|escape}}",
+"{{tutee.gender|escape}}",
+"{{tutee.get_grade|escape}}",
+"{{tutee.subjects|escape}}",
+"{{tutee.added_on|escape}}"] {% if not forloop.last %},{% endif %}
 {% endfor %}
 ]
 }

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
+<a href="{% url match.views.new_match %}">New Match</a>
 {% for match in matches %}
 {{ match.tutor.get_full_name }}
 {{ match.tutee.get_child_full_name }}

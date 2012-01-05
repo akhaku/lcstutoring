@@ -46,79 +46,6 @@ div#content {
 .w100 { width: 100px; }
 .w250 { width: 250px; }
 
-form#login-form {
-    font-size: 20px;
-    margin-left: 50px;
-    margin-top: 50px;
-}
-
-div.tut-explanation {
-    border: 1px solid #0A0A2A;
-    padding: 10px;
-    width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-div.tut-explanation p {
-    font-size: 15px;
-    padding: 0px;
-    margin: 0px;
-    text-align: center;
-}
-
-form.tut-form {
-    color: #0A0A2A;
-    padding-left: 140px;
-    font-size: 18px;
-    font-family: Dax-Regular;
-}
-
-form.tut-form input, form.tut-form textarea {
-    font-size: 15px;
-    padding: 2px;
-    border-radius: 5px;
-    font-family: Helvetica, Arial;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-}
-
-form.tut-form input[type=submit] {
-    font-size: 20px;
-    padding: 5px;
-    background-color: #0B0B3B;
-    color: #FFFFFF;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    position: relative;
-    left: 100px;
-    top: 10px;
-}
-
-form.tut-form ul{
-    list-style-type: none;
-}
-
-div.tutee-form-fieldset {
-    margin-top: 15px;
-    margin-bottom: 5px;
-    border-bottom: 2px dashed #000000;
-    width: 650px;
-}
-
-table.data {
-    width: 100%;
-}
-
-table.data th {
-    cursor: pointer; 
-}
-
-table.data td {
-    font-size: 12px;
-}
-
 ul.messages {
     list-style-type: none;
     width: 700px;
@@ -144,3 +71,47 @@ ul.messages li.info { background-color: #071019; }
 
 ul.errorlist { list-style-type: none; margin: 0px 0px 20px 0px; padding: 0px; }
 ul.errorlist li { float: left; font-size: 12px; color: #8A0808; }
+
+ul#nav {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+ul#nav li {
+    float: left;
+}
+
+ul#nav li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    background:url('../img/gradient.png') 0px -20px;
+}
+
+ul#nav li a:hover {
+    background:url('../img/gradient.png') 0px -10px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+form#login-form {
+    font-size: 20px;
+    margin-left: 50px;
+    margin-top: 50px;
+}
+
+table.data { width: 100%; }
+table.data th { cursor: pointer; }
+table.data td { font-size: 12px; }
+
+div#tut-mini-wrapper {
+    width: 800px;
+}
+
+div#tut-mini-wrapper div {
+    float: left;
+    width: 375px;
+    border: 1px solid black;
+}
+
