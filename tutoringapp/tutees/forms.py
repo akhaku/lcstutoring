@@ -75,5 +75,5 @@ class TuteeForm(TmsModelForm):
         ret = super(TuteeForm, self).clean()
         if not self.cleaned_data.get('home_phone_number') and \
                 not self.cleaned_data.get('cell_phone_number'):
-            raise ValidationError("Please enter at least one phone number")
+            raise ValidationError("Please enter at least one valid phone number")
         return ret

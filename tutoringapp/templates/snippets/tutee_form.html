@@ -2,6 +2,7 @@
 <form action="{% url tutees.views.register %}" class="tut-form" method="post" id="tutee-form">
     {% if form.non_field_errors %}
     <ul class="errorlist">{{ form.non_field_errors.as_ul }}</ul>
+    <div class="clearfix"></div>
     {% endif %}
     <div class="tutee-form-fieldset">Parent/Guardian information</div>
     <div class="w100 left">
