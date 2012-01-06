@@ -1,31 +1,81 @@
 {% extends "base.html" %}
 {% block body %}
 <div id="match-box">
-    <div>Tutor:
-        <span id="tutor-selected"></span>
+    <div id="tutor-box">Tutor:
+        <div id="tutor-selected"></div>
     </div>
-    <div>Tutee:
-        <span id="tutee-selected"></span>
+    <div id="tutee-box">Tutee:
+        <div id="tutee-selected"></div>
     </div>
-    <button>Make match</button>
+    <textarea id="match-note" rows="2" cols="20" placeholder="Note"></textarea>
+    <button id="match-make">Make match</button>
+    <div class="clearfix"></div>
 </div>
-<div id="tut-mini-wrapper">
-    <div>
-        <div>Tutors</div>
-        {% for tutor in tutors %}
-        <div class="tutor-cand" rel="{{tutor.id}}">
-            {{ tutor.get_full_name }}
-        </div>
-        {% endfor %}
-    </div>
-    <div>
-        <div>Tutees</div>
-        {% for tutee in tutees %}
-        <div class="tutee-cand" rel="{{tutee.id}}">
-            {{ tutee.get_child_full_name }}
-        </div>
-        {% endfor %}
-    </div>
+    <div class="clearfix"></div>
+<div class="tut-mini-wrapper right-dashed">
+    <table class="data">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Grade pref</th>
+                <th>Subjects</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tutor in tutors %}
+            <tr class="tutor-cand" rel="{{tutor.id}}">
+                <td>{{ tutor.get_full_name }}</td>
+                <td>{{ tutor.get_tutoring_pref }}</td>
+                <td>{{ tutor.subjects }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="tut-mini-wrapper">
+    <table class="data">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Grade</th>
+                <th>Subjects</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tutee in tutees %}
+            <tr class="tutee-cand" rel="{{tutee.id}}">
+                <td>{{ tutee.get_child_full_name }}</td>
+                <td>{{tutee.get_grade}}</td>
+                <td>{{tutee.subjects}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 <div class="clearfix"></div>
 {% endblock body %}
+
+{% block extrascript %}
+<script type="text/javascript">
+    $('.data').dataTable();
+    $('button#match-make').click(function() {
+            tutor_id = $('#tutor-selected').attr('rel');    
+            tutee_id = $('#tutee-selected').attr('rel');    
+            match_note = $('#match-note').val();
+            $.post('{% url match.views.create_match %}', {
+                tutor_id: tutor_id,
+                tutee_id: tutee_id,
+                match_note: match_note,
+                csrfmiddlewaretoken: "{{csrf_token}}",
+            }, function (data) {
+                if(data.not_authenticated) {
+                    alert("Not authenticated"); //TODO
+                    }
+                if(!data.error) {
+                    // TODO error handling, notification bar
+                    clearMatchBox();
+                }
+            });
+        });
+</script>
+{% endblock extrascript %}

@@ -1,10 +1,15 @@
 $(document).ready(function() {
+    initMatchDragDrop();
+});
+
+
+function initMatchDragDrop() {
     $('.tutor-cand, .tutee-cand').draggable({
         helper: function(event) {
-                    console.log($(event.target));
-                return $(event.target).clone();
-            }
+                    return $(event.target).parent().clone();
+                }
     });
+
     $('#match-box').droppable({
         accept: '.tutor-cand, .tutee-cand',
         tolerance: 'pointer',
@@ -14,9 +19,18 @@ $(document).ready(function() {
             } else if(ui.helper.hasClass('tutor-cand')) {
                 which = "tutor";
             }
-            console.log(ui.helper.html());
-            $('span#'+which+'-selected').text(ui.helper.html());
-            $('span#'+which+'-selected').attr('rel',ui.helper.attr('rel'));
+            $('#'+which+'-selected').html('<table>'+ui.helper.html()+'</table>');
+            $('#'+which+'-selected').attr('rel',ui.helper.attr('rel'));
         }
     });
-});
+}
+
+function clearMatchBox() {
+    $('div.tutor-cand[rel='+tutor_id+']').slideUp();
+    $('div.tutee-cand[rel='+tutee_id+']').slideUp();
+    $('#tutor-selected').html('');
+    $('#tutor-selected').attr('rel','');
+    $('#tutee-selected').html('');
+    $('#tutee-selected').attr('rel','');
+    $('#match-note').val('');
+}

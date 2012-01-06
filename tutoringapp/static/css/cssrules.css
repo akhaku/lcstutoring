@@ -95,6 +95,10 @@ ul#nav li a:hover {
 
 /*----------------------------------------------------------------------------*/
 
+textarea {
+    font-family: Helvetica, Arial;
+}
+
 form#login-form {
     font-size: 20px;
     margin-left: 50px;
@@ -105,13 +109,52 @@ table.data { width: 100%; }
 table.data th { cursor: pointer; }
 table.data td { font-size: 12px; }
 
-div#tut-mini-wrapper {
-    width: 800px;
+.dataTables_filter, .dataTables_length {
+    font-size: 15px;
+    color: #122A0A;
+    font-family: Dax-Regular;
+}
+
+/* Matchmaking page */
+div.tut-mini-wrapper {
+    width: 420px;
+    float: left;
+    padding: 7px;
+    margin: 2px;
+}
+
+div#tutee-box, div#tutor-box {
+    height: 50px;
+}
+
+#match-box {
+    width: 920px;
+    padding: 5px;
+    height: 90px;
+    border: 1px solid black;
+}
+
+.right-dashed {
+    border-right: 2px dashed #122A0A;
 }
 
 div#tut-mini-wrapper div {
     float: left;
     width: 375px;
-    border: 1px solid black;
 }
 
+div.tutee-cand, div.tutor-cand {
+    cursor: pointer;
+    font-size: 12px;
+    padding: 5px;
+}
+
+div#tutor-box, div#tutee-box {
+    width: 45%;
+    float: left;
+}
+
+div#tutee-selected, div#tutor-selected {
+    width: 400px;
+    float: left;
+}

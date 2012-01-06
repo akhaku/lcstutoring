@@ -20,9 +20,6 @@
 {% endblock %}
 
 {% block extrascript %}
-<script type="text/javascript"
-    src="{{MEDIA_URL}}plugins/datatables/js/jquery.dataTables.min.js">
-</script>
 <script type="text/javascript">
     $(document).ready(function() {
             $('table#tutees').dataTable({
@@ -32,6 +29,3 @@
     });
 </script>
 {% endblock extrascript %}
-{% block extrastyle %}
-<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}plugins/datatables/css/demo_table.css" />
-{% endblock extrastyle %}
