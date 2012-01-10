@@ -12,6 +12,7 @@
     <input name="password" type="password" />
     </div>
     <div class="clearfix"></div>
+    <input type="hidden" value={% firstof redirect_to '/' %} name="next" />
     <br/>
     {% csrf_token %}
     <input type="submit" />
