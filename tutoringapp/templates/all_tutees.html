@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block body %}
+<a href="#" id="available-tutees">Available</a>
+<a href="#" id="unavailable-tutees">Unavailable</a>
+<a href="#" id="all-tutees">All</a>
+<a href="#" id="hidden-tutees">Hidden</a>
 <table id="tutees" class="data">
     <thead>
         <tr>
@@ -24,8 +28,35 @@
     $(document).ready(function() {
             $('table#tutees').dataTable({
                 "bProcessing": true,
-                "sAjaxSource": "{% url tutees.views.tutees_json %}"
+                "sAjaxSource": "{% url tutees.views.tutees_json "available" %}",
+                "fnDrawCallback": function(oSettings) {
+                    tuteeEditHandlers();
+                }
             });
     });
+
+$('#all-tutees').click(function() {
+        $('table#tutees').dataTable().
+        fnReloadAjax('{% url tutees.views.tutees_json "all" %}');
+        return false;
+});
+
+$('#available-tutees').click(function() {
+        $('table#tutees').dataTable().
+        fnReloadAjax('{% url tutees.views.tutees_json "available" %}');
+        return false;
+});
+
+$('#unavailable-tutees').click(function() {
+        $('table#tutees').dataTable().
+        fnReloadAjax('{% url tutees.views.tutees_json "unavailable" %}');
+        return false;
+});
+
+$('#hidden-tutees').click(function() {
+        $('table#tutees').dataTable().
+        fnReloadAjax('{% url tutees.views.tutees_json "hidden" %}');
+        return false;
+});
 </script>
 {% endblock extrascript %}

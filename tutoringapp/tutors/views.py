@@ -6,6 +6,7 @@ from django.core.serializers import serialize
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
+from match.models import Match
 from tutors.forms import TutorForm
 from tutors.models import Tutor
 import logging
@@ -37,8 +38,19 @@ def all_tutors(request):
         }, context_instance=RequestContext(request))
 
 @login_required
-def tutors_json(request):
-    all_tutors = Tutor.objects.filter(active=True).order_by('-added_on')
+def tutors_json(request, which):
+    matched_tutor_ids = Match.objects.filter(active=True).values_list('tutor_id',
+            flat=True)
+    if which == "hidden":
+        all_tutors = Tutor.objects.filter(active=False).order_by('-added_on')
+    if which == "all":
+        all_tutors = Tutor.objects.filter(active=True).order_by('-added_on')
+    if which == "unavailable":
+        all_tutors = Tutor.objects.filter(active=True,id__in=matched_tutor_ids).\
+                order_by('-added_on')
+    if which == "available":
+        all_tutors = Tutor.objects.filter(active=True).\
+                exclude(id__in=matched_tutor_ids).order_by('-added_on')
     return render_to_response('tutors_ajax.html', {
         'tutors': all_tutors,
         }, context_instance=RequestContext(request))

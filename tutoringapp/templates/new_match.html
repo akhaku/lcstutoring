@@ -58,6 +58,7 @@
 {% block extrascript %}
 <script type="text/javascript">
     $('.data').dataTable();
+    initMatchDragDrop();
     $('button#match-make').click(function() {
             tutor_id = $('#tutor-selected').attr('rel');    
             tutee_id = $('#tutee-selected').attr('rel');    

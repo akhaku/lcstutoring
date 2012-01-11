@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
+from match.models import Match
 from tutees.forms import TuteeForm
 from tutees.models import Tutee
 
@@ -34,8 +35,19 @@ def all_tutees(request):
         'tutees': tutees
         }, context_instance=RequestContext(request))
 
-def tutees_json(request):
-    all_tutees = Tutee.objects.filter(active=True).order_by('-added_on')
+def tutees_json(request, which):
+    matched_tutee_ids = Match.objects.filter(active=True).values_list('tutee_id',
+            flat=True)
+    if which == "hidden":
+        all_tutees = Tutee.objects.filter(active=False).order_by('-added_on')
+    if which == "all":
+        all_tutees = Tutee.objects.filter(active=True).order_by('-added_on')
+    if which == "available":
+        all_tutees = Tutee.objects.filter(active=True).\
+                exclude(id__in=matched_tutee_ids).order_by('-added_on')
+    if which == "unavailable":
+        all_tutees = Tutee.objects.filter(active=True,id__in=matched_tutee_ids).\
+                order_by('-added_on')
     return render_to_response('tutees_ajax.html', {
         'tutees': all_tutees,
         }, context_instance=RequestContext(request))

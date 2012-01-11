@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block body %}
+<a href="#" id="available-tutors">Available</a>
+<a href="#" id="unavailable-tutors">Unavailable</a>
+<a href="#" id="all-tutors">All</a>
+<a href="#" id="hidden-tutors">Hidden</a>
 <table id="tutors" class="data">
     <thead>
         <tr>
@@ -22,8 +26,36 @@
     $(document).ready(function() {
         $('table#tutors').dataTable({
             "bProcessing": true,
-            "sAjaxSource": "{% url tutors.views.tutors_json %}"
+            "sAjaxSource": "{% url tutors.views.tutors_json "available" %}",
+            "fnDrawCallback": function(oSettings) {
+                tutorEditHandlers();
+            }
         });
     });
+
+$('#all-tutors').click(function() {
+        $('table#tutors').dataTable().
+        fnReloadAjax('{% url tutors.views.tutors_json "all" %}');
+        return false;
+});
+
+$('#available-tutors').click(function() {
+        $('table#tutors').dataTable().
+        fnReloadAjax('{% url tutors.views.tutors_json "available" %}');
+        return false;
+});
+
+$('#unavailable-tutors').click(function() {
+        $('table#tutors').dataTable().
+        fnReloadAjax('{% url tutors.views.tutors_json "unavailable" %}');
+        return false;
+});
+
+$('#hidden-tutors').click(function() {
+        $('table#tutors').dataTable().
+        fnReloadAjax('{% url tutors.views.tutors_json "hidden" %}');
+        return false;
+});
+
 </script>
 {% endblock extrascript %}

@@ -1,13 +1,14 @@
 { 
     "aaData": [
 {% for tutor in tutors %}
-["{{tutor.get_full_name|escape}}",
-"{{ tutor.phone_number|escape }}",
-"{{ tutor.email_address|escape }}",
-"{{ tutor.grad_year|escape }}",
-"{{ tutor.get_tutoring_pref|escape }}",
-"{{ tutor.subjects|escape }}",
-"{{ tutor.added_on|escape }}"] {% if not forloop.last %},{% endif %}
+{"0": "{{tutor.get_full_name|escape}}",
+"1": "{{ tutor.phone_number|escape }}",
+"2": "{{ tutor.email_address|escape }}",
+"3": "{{ tutor.grad_year|escape }}",
+"4": "{{ tutor.get_tutoring_pref|escape }}",
+"5": "{{ tutor.subjects|escape }}",
+"6": "{{ tutor.added_on|escape }}",
+"DT_RowId": "{{tutor.id}}"} {% if not forloop.last %},{% endif %}
 {% endfor %}
 ]
 }
