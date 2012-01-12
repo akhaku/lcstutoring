@@ -116,6 +116,24 @@ form input[type=submit] {
 }
 
 /*----------------------------------------------------------------------------*/
+.radio-buttons {
+    margin: 10px;
+}
+
+.radio-buttons label {
+    font-size: 13px;
+    padding: 10px;
+    margin: 0px;
+    margin-right: -0.5em;
+    width: 50px;;
+    position: relative:
+    right: -10px;
+    top: 0px;
+}
+
+.radio-buttons input {
+    margin: 0px;
+}
 
 textarea {
     font-family: Helvetica, Arial;

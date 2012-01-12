@@ -1,9 +1,19 @@
 {% extends "base.html" %}
 {% block body %}
-<a href="#" id="available-tutees">Available</a>
-<a href="#" id="unavailable-tutees">Unavailable</a>
-<a href="#" id="all-tutees">All</a>
-<a href="#" id="hidden-tutees">Hidden</a>
+<div id="selection" class="radio-buttons">
+    <input type="radio" id="available-tutees" checked="checked" name="radio" />
+    <label for="available-tutees">Available</label>
+
+    <input type="radio" id="unavailable-tutees" name="radio" />
+    <label for="unavailable-tutees">Unavailable</label>
+
+    <input type="radio" id="all-tutees" name="radio" />
+    <label for="all-tutees">All</label>
+
+    <input type="radio" id="hidden-tutees" name="radio" />
+    <label for="hidden-tutees">Hidden</label>
+</div>
+
 <table id="tutees" class="data">
     <thead>
         <tr>
@@ -25,15 +35,16 @@
 
 {% block extrascript %}
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('table#tutees').dataTable({
-            "bProcessing": true,
-            "sAjaxSource": "{% url tutees.views.tutees_json "available" %}",
-            "fnDrawCallback": function(oSettings) {
-                tuteeEditHandlers("{% url tutees.views.edit_tutee %}");
-            }
-        });
+$(document).ready(function() {
+    $('table#tutees').dataTable({
+        "bProcessing": true,
+        "sAjaxSource": "{% url tutees.views.tutees_json "available" %}",
+        "fnDrawCallback": function(oSettings) {
+            tuteeEditHandlers("{% url tutees.views.edit_tutee %}");
+        }
     });
+    $('#selection').buttonset();
+});
 
 $('#all-tutees').click(function() {
         $('table#tutees').dataTable().

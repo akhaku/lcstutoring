@@ -1,9 +1,19 @@
 {% extends "base.html" %}
 {% block body %}
-<a href="#" id="available-tutors">Available</a>
-<a href="#" id="unavailable-tutors">Unavailable</a>
-<a href="#" id="all-tutors">All</a>
-<a href="#" id="hidden-tutors">Hidden</a>
+<div id="selection" class="radio-buttons">
+    <input type="radio" id="available-tutors" checked="checked" name="radio" />
+    <label for="available-tutors">Available</label>
+
+    <input type="radio" id="unavailable-tutors" name="radio" />
+    <label for="unavailable-tutors">Unavailable</label>
+
+    <input type="radio" id="all-tutors" name="radio" />
+    <label for="all-tutors">All</label>
+
+    <input type="radio" id="hidden-tutors" name="radio" />
+    <label for="hidden-tutors">Hidden</label>
+</div>
+
 <table id="tutors" class="data">
     <thead>
         <tr>
@@ -23,15 +33,16 @@
 
 {% block extrascript %}
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('table#tutors').dataTable({
-            "bProcessing": true,
-            "sAjaxSource": "{% url tutors.views.tutors_json "available" %}",
-            "fnDrawCallback": function(oSettings) {
-                tutorEditHandlers("{% url tutors.views.edit_tutor %}");
-            }
-        });
+$(document).ready(function() {
+    $('table#tutors').dataTable({
+        "bProcessing": true,
+        "sAjaxSource": "{% url tutors.views.tutors_json "available" %}",
+        "fnDrawCallback": function(oSettings) {
+            tutorEditHandlers("{% url tutors.views.edit_tutor %}");
+        }
     });
+    $('#selection').buttonset();
+});
 
 $('#all-tutors').click(function() {
         $('table#tutors').dataTable().
