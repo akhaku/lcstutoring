@@ -49,6 +49,7 @@ function tutorEditHandlers(base_url) {
                 width: 800,
                 close: function(event, ui) {
                     dialog.remove();
+                    $('.ui-state-active').prev().trigger('click');
                 }
             });
         });
@@ -69,6 +70,7 @@ function tuteeEditHandlers(base_url) {
                 width: 800,
                 close: function(event, ui) {
                     dialog.remove();
+                    $('.ui-state-active').prev().trigger('click');
                 }
             });
         });
@@ -77,13 +79,16 @@ function tuteeEditHandlers(base_url) {
 }
 
 function noteSlideHandler() {
+    $('.data tr td:last-child').each(function(index, elem) {
+        $(elem).attr('rel', $(elem).height());
+    })
     $('.data tr td:last-child').click(function() {
-        if (this.style.height == 'auto') {
-            this.style.height = '12px';
-        } else {
-            this.style.height = 'auto';
-        }
+        var temp = $(this).height();
+        $(this).animate({height: $(this).attr('rel')}, 600);
+        $(this).height($(this).attr('rel'));
+        $(this).attr('rel',temp);
     });
+    $('.data tr td:last-child').height('12');
 }
 
 /* Datatables plugin */

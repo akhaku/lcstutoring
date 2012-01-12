@@ -150,7 +150,6 @@ table.data th { cursor: pointer; }
 table.data td { font-size: 12px;}
 table.data td:last-child {
     display: block;
-    height: 12px;
     overflow: hidden;
 }
 
