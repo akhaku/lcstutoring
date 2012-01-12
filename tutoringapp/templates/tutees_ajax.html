@@ -1,16 +1,16 @@
 { 
     "aaData": [
 {% for tutee in tutees %}
-{"0": "{{tutee.get_child_full_name|escape}}",
-"1": "{{tutee.get_parent_full_name|escape}}",
-"2": "{{tutee.home_phone_number|escape}}",
-"3": "{{tutee.cell_phone_number|escape}}",
-"4": "{{tutee.email_address|escape}}",
-"5": "{{tutee.gender|escape}}",
-"6": "{{tutee.get_grade|escape}}",
-"7": "{{tutee.subjects|escape}}",
-"8": "{{tutee.added_on|escape}}",
-"9": "{{tutee.note}}",
+{"0": "{{ tutee.get_child_full_name|escape }}",
+"1": "{{ tutee.get_parent_full_name|escape }}",
+"2": "{{ tutee.home_phone_number|escape }}",
+"3": "{{ tutee.cell_phone_number|escape }}",
+"4": "{{ tutee.email_address|escape }}",
+"5": "{{ tutee.gender|escape }}",
+"6": "{{ tutee.get_grade|escape }}",
+"7": "{{ tutee.subjects|escape }}",
+"8": "{{ tutee.added_on|escape }}",
+"9": "{{ tutee.note|escapejs }}",
 "DT_RowId": "{{tutee.id}}"} {% if not forloop.last %},{% endif %}
 {% endfor %}
 ]

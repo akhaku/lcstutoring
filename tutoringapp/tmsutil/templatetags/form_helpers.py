@@ -3,8 +3,7 @@ from django import template
 register = template.Library()
 
 def rows(value, arg):
-    """
-    Changes the rows of a textarea widget
+    """ Changes the rows of a textarea widget
     """
     attrs = value.field.widget.attrs
     orig = attrs['rows'] if 'rows' in attrs else None

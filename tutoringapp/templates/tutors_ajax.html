@@ -1,3 +1,4 @@
+{% load rendering_helpers %}
 { 
     "aaData": [
 {% for tutor in tutors %}
@@ -8,7 +9,7 @@
 "4": "{{ tutor.get_tutoring_pref|escape }}",
 "5": "{{ tutor.subjects|escape }}",
 "6": "{{ tutor.added_on|escape }}",
-"7": "{{ tutor.note }}",
+"7": "{{ tutor.note|escapejs }}",
 "DT_RowId": "{{tutor.id}}"} {% if not forloop.last %},{% endif %}
 {% endfor %}
 ]
