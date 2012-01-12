@@ -1,0 +1,23 @@
+<form  action="{% url tutees.views.edit_tutee tutee_id %}" method="post">
+{% include "snippets/tutee_form.html" %}
+<div class="clearfix"></div>
+<input type="submit" value="Save" />
+</form>
+<script type="text/javascript">
+{% if not submitted %}
+    $('form').submit(function(event) {
+        event.preventDefault();
+        var dataStr = $('form').serialize();
+        $.ajax({
+            type: "POST",
+            url: "{% url tutees.views.edit_tutee tutee_id %}",
+            data: dataStr,
+            success: function(data) {
+                $('form').parent().html(data);
+            }
+        });
+    });
+{% else %}
+$('form').parent().dialog('close');
+{% endif %}
+</script>

@@ -3,10 +3,12 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.core.serializers import serialize
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
+import json
 from match.models import Match
+from tmsutil.decorators import ajax_login_required
 from tutors.forms import TutorForm
 from tutors.models import Tutor
 import logging
@@ -55,11 +57,18 @@ def tutors_json(request, which):
         'tutors': all_tutors,
         }, context_instance=RequestContext(request))
 
-@login_required
-def edit_tutor(request, tutor_id):
+@ajax_login_required
+def edit_tutor(request, tutor_id=None):
     tutor = get_object_or_404(Tutor, id=tutor_id)
-    form = TutorForm(instance=tutor)
-    return render_to_response('register_tutor.html',
-            {'form': form },
+    submitted = False
+    if request.method == "POST":
+        form = TutorForm(request.POST, instance=tutor)
+        if form.is_valid():
+            submitted = True
+            form.save()
+    else:
+        form = TutorForm(instance=tutor)
+    return render_to_response('edit_tutor.html',
+            {'form': form, 'tutor_id': tutor_id, 'submitted': submitted },
         context_instance=RequestContext(request))
 

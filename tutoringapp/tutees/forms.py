@@ -6,10 +6,10 @@ from tmsutil.forms import TmsModelForm
 class TuteeForm(TmsModelForm):
     _gender_choices = ['male', 'female']
     _year_choices = [val[0] for val in YEAR_CHOICES]
-    exclude = ('added_on', 'active',)
 
     class Meta:
         model = Tutee
+        exclude = ('added_on', 'active',)
 
     def clean_cell_phone_number(self):
         phone = self.cleaned_data.get('cell_phone_number')

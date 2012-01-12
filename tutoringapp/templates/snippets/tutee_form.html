@@ -1,5 +1,4 @@
 {% load form_helpers %}
-<form action="{% url tutees.views.register %}" class="tut-form" method="post" id="tutee-form">
     {% if form.non_field_errors %}
     <ul class="errorlist">{{ form.non_field_errors.as_ul }}</ul>
     <div class="clearfix"></div>
@@ -101,6 +100,3 @@
     </div>
     <div class="clearfix"></div>
     {% csrf_token %}
-    <input type="submit" />
-    <div class="clearfix"></div>
-</form>

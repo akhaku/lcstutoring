@@ -6,11 +6,11 @@ from tmsutil.forms import TmsModelForm
 
 class TutorForm(TmsModelForm):
     _year_choices = [val[0] for val in YEAR_CHOICES]
-    exclude = ('added_on', 'active',)
     captcha = CaptchaField()
 
     class Meta:
         model = Tutor
+        exclude = ('added_on', 'active',)
 
     def clean_first_name(self):
         name = self.cleaned_data.get('first_name')

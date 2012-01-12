@@ -26,13 +26,13 @@
 {% block extrascript %}
 <script type="text/javascript">
     $(document).ready(function() {
-            $('table#tutees').dataTable({
-                "bProcessing": true,
-                "sAjaxSource": "{% url tutees.views.tutees_json "available" %}",
-                "fnDrawCallback": function(oSettings) {
-                    tuteeEditHandlers();
-                }
-            });
+        $('table#tutees').dataTable({
+            "bProcessing": true,
+            "sAjaxSource": "{% url tutees.views.tutees_json "available" %}",
+            "fnDrawCallback": function(oSettings) {
+                tuteeEditHandlers("{% url tutees.views.edit_tutee %}");
+            }
+        });
     });
 
 $('#all-tutees').click(function() {

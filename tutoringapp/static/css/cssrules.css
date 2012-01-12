@@ -93,6 +93,28 @@ ul#nav li a:hover {
     background:url('../img/gradient.png') 0px -10px;
 }
 
+form input, form textarea {
+    font-size: 15px;
+    padding: 2px;
+    font-family: Helvetica, Arial;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+form input[type=submit] {
+    font-size: 20px;
+    padding: 5px;
+    background-color: #0B0B3B;
+    color: #FFFFFF;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    position: relative;
+    left: 100px;
+    top: 10px;
+}
+
 /*----------------------------------------------------------------------------*/
 
 textarea {

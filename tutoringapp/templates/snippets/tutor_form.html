@@ -1,6 +1,4 @@
 {% load form_helpers %}
-<br/>
-<form action="{% url tutors.views.register %}" class="tut-form" method="post" id="tutor-form">
     {% if form.non_field_errors %}
     <ul class="errorlist">{{ form.non_field_errors.as_ul }}</ul>
     {% endif %}
@@ -86,7 +84,3 @@
         {{ form.captcha.errors }}
     </div>
     {% csrf_token %}
-    <input type="submit" />
-    <br/>
-    <div class="clearfix"></div>
-</form>

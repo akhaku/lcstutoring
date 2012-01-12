@@ -2,10 +2,12 @@ from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
+import json
 from match.models import Match
+from tmsutil.decorators import ajax_login_required
 from tutees.forms import TuteeForm
 from tutees.models import Tutee
 
@@ -52,11 +54,17 @@ def tutees_json(request, which):
         'tutees': all_tutees,
         }, context_instance=RequestContext(request))
 
-@login_required
+@ajax_login_required
 def edit_tutee(request, tutee_id):
     tutee = get_object_or_404(Tutee, id=tutee_id)
-    form = TuteeForm(instance=tutee)
-    return render_to_response('register_tutee.html',
-            {'form': form },
+    submitted = False
+    if request.method == "POST":
+        form = TuteeForm(request.POST, instance=tutee)
+        if form.is_valid():
+            submitted = True
+            form.save()
+    else:
+        form = TuteeForm(instance=tutee)
+    return render_to_response('edit_tutee.html',
+            {'form': form, 'tutee_id': tutee_id, 'submitted': submitted },
         context_instance=RequestContext(request))
-

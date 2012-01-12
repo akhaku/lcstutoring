@@ -28,7 +28,7 @@
             "bProcessing": true,
             "sAjaxSource": "{% url tutors.views.tutors_json "available" %}",
             "fnDrawCallback": function(oSettings) {
-                tutorEditHandlers();
+                tutorEditHandlers("{% url tutors.views.edit_tutor %}");
             }
         });
     });

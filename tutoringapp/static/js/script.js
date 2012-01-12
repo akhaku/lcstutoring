@@ -37,16 +37,40 @@ function matchEditHandlers() {
     });
 }
 
-function tutorEditHandlers() {
+function tutorEditHandlers(base_url) {
     $('table.data tbody tr td').dblclick(function() {
-        console.log("Clicked on tutor " + $(this).parent().attr('id'));
+        var dialog = $('<div style="display:none" title="Edit Tutor"></div>').
+        appendTo('body');
+        var tutor_id = $(this).parent().attr('id');
+        url = base_url+""+tutor_id+"/";
+        dialog.load(url, function (responseText, textStatus, XMLHttpRequest) {
+            dialog.dialog({
+                modal: true,
+                width: 800,
+                close: function(event, ui) {
+                    dialog.remove();
+                }
+            });
+        });
         return false;
     });
 }
 
-function tuteeEditHandlers() {
+function tuteeEditHandlers(base_url) {
     $('table.data tbody tr td').dblclick(function() {
-        console.log("Clicked on tutee" + $(this).parent().attr('id'));
+        var dialog = $('<div style="display:none" title="Edit Tutee"></div>').
+        appendTo('body');
+        var tutee_id = $(this).parent().attr('id');
+        url = base_url+""+tutee_id+"/";
+        dialog.load(url, function (responseText, textStatus, XMLHttpRequest) {
+            dialog.dialog({
+                modal: true,
+                width: 800,
+                close: function(event, ui) {
+                    dialog.remove();
+                }
+            });
+        });
         return false;
     });
 }

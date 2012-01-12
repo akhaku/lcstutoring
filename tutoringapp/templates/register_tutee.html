@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 {% block body %}
 <div class="tut-explanation rounded-10">
-<p>Use this form to register your child for tutoring. Please fill out this form once per child.</p>
-<p>Problems? Contact the LCS Tutoring Coordinators at lcs.tutor [at] gmail dot com!</p>
+    <p>Use this form to register your child for tutoring. Please fill out this form once per child.</p>
+    <p>Problems? Contact the LCS Tutoring Coordinators at lcs.tutor [at] gmail dot com!</p>
 </div>
-{% include "snippets/tutee_form.html" %}
+<form action="{% url tutees.views.register %}" class="tut-form" method="post" id="tutee-form">
+    {% include "snippets/tutee_form.html" %}
+    <input type="submit" />
+    <div class="clearfix"></div>
+</form>
 {% endblock body %}
 
 {% block extrastyle %}
