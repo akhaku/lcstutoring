@@ -147,7 +147,12 @@ form#login-form {
 
 table.data { width: 100%; }
 table.data th { cursor: pointer; }
-table.data td { font-size: 12px; }
+table.data td { font-size: 12px;}
+table.data td:last-child {
+    display: block;
+    height: 12px;
+    overflow: hidden;
+}
 
 .dataTables_filter, .dataTables_length {
     font-size: 15px;

@@ -23,49 +23,51 @@
             <th>Year</th>
             <th>Pref</th>
             <th>Subjects</th>
-            <th>Added on</th>
+            <th>Add on</th>
+            <th>Note</th>
         </tr>
     </thead>
     <tbody>
     </tbody>
 </table>
+<div class="clearfix"></div>
 {% endblock %}
 
 {% block extrascript %}
 <script type="text/javascript">
 $(document).ready(function() {
-    $('table#tutors').dataTable({
-        "bProcessing": true,
-        "sAjaxSource": "{% url tutors.views.tutors_json "available" %}",
-        "fnDrawCallback": function(oSettings) {
-            tutorEditHandlers("{% url tutors.views.edit_tutor %}");
-        }
-    });
-    $('#selection').buttonset();
+$('table#tutors').dataTable({
+    "bProcessing": true,
+    "sAjaxSource": "{% url tutors.views.tutors_json "available" %}",
+    "fnDrawCallback": function(oSettings) {
+        tutorEditHandlers("{% url tutors.views.edit_tutor %}");
+    }
+});
+$('#selection').buttonset();
 });
 
 $('#all-tutors').click(function() {
-        $('table#tutors').dataTable().
-        fnReloadAjax('{% url tutors.views.tutors_json "all" %}');
-        return false;
+    $('table#tutors').dataTable().
+    fnReloadAjax('{% url tutors.views.tutors_json "all" %}');
+    return false;
 });
 
 $('#available-tutors').click(function() {
-        $('table#tutors').dataTable().
-        fnReloadAjax('{% url tutors.views.tutors_json "available" %}');
-        return false;
+    $('table#tutors').dataTable().
+    fnReloadAjax('{% url tutors.views.tutors_json "available" %}');
+    return false;
 });
 
 $('#unavailable-tutors').click(function() {
-        $('table#tutors').dataTable().
-        fnReloadAjax('{% url tutors.views.tutors_json "unavailable" %}');
-        return false;
+    $('table#tutors').dataTable().
+    fnReloadAjax('{% url tutors.views.tutors_json "unavailable" %}');
+    return false;
 });
 
 $('#hidden-tutors').click(function() {
-        $('table#tutors').dataTable().
-        fnReloadAjax('{% url tutors.views.tutors_json "hidden" %}');
-        return false;
+    $('table#tutors').dataTable().
+    fnReloadAjax('{% url tutors.views.tutors_json "hidden" %}');
+    return false;
 });
 
 </script>

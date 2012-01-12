@@ -32,12 +32,12 @@ function clearMatchBox() {
 
 function matchEditHandlers() {
     $('table.data tbody tr td').dblclick(function() {
-        console.log("Clicked on match " + $(this).parent().attr('id'));
         return false;
     });
 }
 
 function tutorEditHandlers(base_url) {
+    noteSlideHandler();
     $('table.data tbody tr td').dblclick(function() {
         var dialog = $('<div style="display:none" title="Edit Tutor"></div>').
         appendTo('body');
@@ -57,6 +57,7 @@ function tutorEditHandlers(base_url) {
 }
 
 function tuteeEditHandlers(base_url) {
+    noteSlideHandler();
     $('table.data tbody tr td').dblclick(function() {
         var dialog = $('<div style="display:none" title="Edit Tutee"></div>').
         appendTo('body');
@@ -72,6 +73,16 @@ function tuteeEditHandlers(base_url) {
             });
         });
         return false;
+    });
+}
+
+function noteSlideHandler() {
+    $('.data tr td:last-child').click(function() {
+        if (this.style.height == 'auto') {
+            this.style.height = '12px';
+        } else {
+            this.style.height = 'auto';
+        }
     });
 }
 
