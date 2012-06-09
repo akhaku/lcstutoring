@@ -11,7 +11,6 @@ from match.models import Match
 from tmsutil.decorators import ajax_login_required
 from tutors.forms import TutorForm
 from tutors.models import Tutor
-import logging
 
 def register(request):
     if request.method == "POST":

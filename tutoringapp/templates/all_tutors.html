@@ -47,25 +47,25 @@ $('#selection').buttonset();
 });
 
 $('#all-tutors').click(function() {
-    $('table#tutors').dataTable().
+    dataTable = $('table#tutors').dataTable().
     fnReloadAjax('{% url tutors.views.tutors_json "all" %}');
     return false;
 });
 
 $('#available-tutors').click(function() {
-    $('table#tutors').dataTable().
+    dataTable = $('table#tutors').dataTable().
     fnReloadAjax('{% url tutors.views.tutors_json "available" %}');
     return false;
 });
 
 $('#unavailable-tutors').click(function() {
-    $('table#tutors').dataTable().
+    dataTable = $('table#tutors').dataTable().
     fnReloadAjax('{% url tutors.views.tutors_json "unavailable" %}');
     return false;
 });
 
 $('#hidden-tutors').click(function() {
-    $('table#tutors').dataTable().
+    dataTable = $('table#tutors').dataTable().
     fnReloadAjax('{% url tutors.views.tutors_json "hidden" %}');
     return false;
 });

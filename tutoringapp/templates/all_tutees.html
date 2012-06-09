@@ -48,25 +48,25 @@ $(document).ready(function() {
 });
 
 $('#all-tutees').click(function() {
-        $('table#tutees').dataTable().
+        dataTable = $('table#tutees').dataTable().
         fnReloadAjax('{% url tutees.views.tutees_json "all" %}');
         return false;
 });
 
 $('#available-tutees').click(function() {
-        $('table#tutees').dataTable().
+        dataTable = $('table#tutees').dataTable().
         fnReloadAjax('{% url tutees.views.tutees_json "available" %}');
         return false;
 });
 
 $('#unavailable-tutees').click(function() {
-        $('table#tutees').dataTable().
+        dataTable = $('table#tutees').dataTable().
         fnReloadAjax('{% url tutees.views.tutees_json "unavailable" %}');
         return false;
 });
 
 $('#hidden-tutees').click(function() {
-        $('table#tutees').dataTable().
+        dataTable = $('table#tutees').dataTable().
         fnReloadAjax('{% url tutees.views.tutees_json "hidden" %}');
         return false;
 });

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
+{% load day_display %}
 <a href="{% url match.views.new_match %}">New Match</a>
 <table id="matches" class="data">
     <thead>
@@ -8,31 +9,27 @@
             <th>Child</th>
             <th>Parent</th>
             <th>Subject</th>
+            <th>Day/time</th>
+            <th>Location</th>
             <th>Matcher</th>
             <th>Added on</th>
+            <th>Note</th>
         </tr>
     </thead>
     <tbody>
-        {% for match in matches %}
-        <tr id="{{match.id}}">
-            <td>{{ match.tutor.get_full_name }}</td>
-            <td>{{ match.tutee.get_child_full_name }}</td>
-            <td>{{ match.tutee.get_parent_full_name }}</td>
-            <td>{{ match.tutee.subject }}</td>
-            <td>{{ match.matcher }}</td>
-            <td>{{ match.added_on }}</td>
-        </tr>
-{% endfor %}
     </tbody>
 </table>
 {% endblock body %}
 {% block extrascript %}
 <script type="text/javascript">
     $(document).ready(function() {
-        $('table#matches').dataTable({
+        dataTable = $('table#matches').dataTable({
+            "bProcessing": true,
+            "sAjaxSource": "{% url match.views.matches_json %}",
             "fnDrawCallback": function(oSettings) {
-                matchEditHandlers();
-            }
+            matchEditHandlers("{% url match.views.edit_match %}",
+                "{% url match.views.matches_json %}");
+            },
         });
     });
 </script>

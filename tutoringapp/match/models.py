@@ -10,7 +10,7 @@ class Match(models.Model):
     tutor = models.ForeignKey(Tutor, related_name="match")
     tutee = models.ForeignKey(Tutee, related_name="match")
     matcher = models.ForeignKey(User)
-    day = models.CharField(max_length=1, choices=DAY_CHOICES, blank=True)
+    day = models.IntegerField(max_length=1, choices=DAY_CHOICES, null=True)
     time = models.TimeField(null=True)
     location = models.CharField(max_length=15, choices=MATCH_LOCATION_CHOICES,
             blank=True)

@@ -1,0 +1,17 @@
+{% load day_display %}
+{ 
+    "aaData": [
+{% for match in matches %}
+{"0": "{{match.tutor.get_full_name|escape}}",
+"1": "{{ match.tutee.get_child_full_name|escape }}",
+"2": "{{ match.tutee.get_parent_full_name|escape }}",
+"3": "{{ match.tutee.subjects|escape }}",
+"4": "{{ match.day|default_if_none:""|display_day }} {% if match.day and match.time %} @ {% endif %}{{ match.time|default_if_none:"" }}",
+"5": "{{ match.location|default_if_none:"" }}",
+"6": "{{ match.matcher|escape }}",
+"7": "{{ match.added_on|escape }}",
+"8": "{{ match.note|escapejs }}",
+"DT_RowId": "{{match.id}}"} {% if not forloop.last %},{% endif %}
+{% endfor %}
+]
+}

@@ -1,18 +1,27 @@
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 import json
+from match.forms import MatchForm
 from match.models import Match
 from tmsutil.decorators import ajax_login_required
 from tutees.models import Tutee
 from tutors.models import Tutor
+import logging
 
 @login_required
 def all_matches(request):
     matches = Match.objects.filter(active=True).order_by('-added_on')
     return render_to_response('all_matches.html', {
+        'matches': matches,
+        }, context_instance=RequestContext(request))
+
+@login_required
+def matches_json(request):
+    matches = Match.objects.filter(active=True).order_by('-added_on')
+    return render_to_response('matches_ajax.html', {
         'matches': matches,
         }, context_instance=RequestContext(request))
 
@@ -42,7 +51,7 @@ def create_match(request):
         tutee = Tutee.objects.get(id=tutee_id) 
         tutor = Tutor.objects.get(id=tutor_id) 
         match = Match.objects.create(tutee=tutee, tutor=tutor, matcher=request.user,
-                day="", location="", added_on = datetime.now(), note=match_note)
+                location="", added_on = datetime.now(), note=match_note)
         message = {
                 'error': False,
                 'tutor': match.tutor.get_full_name(),
@@ -51,3 +60,20 @@ def create_match(request):
                 'tutee_id': match.tutee.id}
     message = json.dumps(message)
     return HttpResponse(message, mimetype='application/json')
+
+@ajax_login_required
+def edit_match(request, match_id=None):
+    match = get_object_or_404(Match, id=match_id)
+    submitted = False
+    if request.method == "POST":
+        form = MatchForm(request.POST, instance=match)
+        if form.is_valid():
+            submitted = True
+            form.save()
+    else:
+        form = MatchForm(instance=match)
+    return render_to_response('edit_match.html',
+            {'form': form, 'match_id': match_id, 'match': match,
+                'submitted': submitted},
+            context_instance=RequestContext(request))
+

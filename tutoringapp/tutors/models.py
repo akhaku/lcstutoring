@@ -29,5 +29,8 @@ class Tutor(models.Model):
             pref_from = 'K'
         return "%s-%s" % (pref_from, self.tutoring_preference_to)
 
+    def __unicode__(self):
+        return self.get_full_name()
+
     def get_edit_url(self):
         return reverse('tutors.views.edit_tutor', args=[self.id])

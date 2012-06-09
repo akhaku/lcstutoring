@@ -30,8 +30,24 @@ function clearMatchBox() {
     $('#match-note').val('');
 }
 
-function matchEditHandlers() {
+function matchEditHandlers(base_url, reloadUrl) {
+    noteSlideHandler();
     $('table.data tbody tr td').dblclick(function() {
+        var dialog = $('<div style="display:none" title="Edit Match"></div>').
+        appendTo('body');
+        var match_id = $(this).parent().attr('id');
+        var edit_url = base_url+""+match_id+"/";
+        dialog.load(edit_url, function (responseText, textStatus, XMLHttpRequest) {
+            dialog.dialog({
+                modal: true,
+                width: 800,
+                close: function(event, ui) {
+                    dialog.remove();
+                    dataTable.fnReloadAjax(reloadUrl);
+                    $('.ui-state-active').prev().trigger('click');
+                }
+            });
+        });
         return false;
     });
 }
@@ -42,8 +58,8 @@ function tutorEditHandlers(base_url) {
         var dialog = $('<div style="display:none" title="Edit Tutor"></div>').
         appendTo('body');
         var tutor_id = $(this).parent().attr('id');
-        url = base_url+""+tutor_id+"/";
-        dialog.load(url, function (responseText, textStatus, XMLHttpRequest) {
+        var edit_url = base_url+""+tutor_id+"/";
+        dialog.load(edit_url, function (responseText, textStatus, XMLHttpRequest) {
             dialog.dialog({
                 modal: true,
                 width: 800,
@@ -88,7 +104,7 @@ function noteSlideHandler() {
         $(this).height($(this).attr('rel'));
         $(this).attr('rel',temp);
     });
-    $('.data tr td:last-child').height('12');
+    $('.data tr td:last-child').height('30');
 }
 
 /* Datatables plugin */

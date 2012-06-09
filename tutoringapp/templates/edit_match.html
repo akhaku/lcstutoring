@@ -1,0 +1,69 @@
+{% load form_helpers %}
+<form class="tut-form" action="{% url match.views.edit_match match_id %}" method="post">
+    {% if form.non_field_errors %}
+    <ul class="errorlist">{{ form.non_field_errors.as_ul }}</ul>
+    {% endif %}
+    <div>
+        Tutor: {{ match.tutor.get_full_name }}
+    </div>
+    <div>
+        Tutee: {{ match.tutee.get_child_full_name }}
+    </div>
+    <div class="w100 left">Time</div>
+    <div class="w250 left">
+        {{ form.time }}
+        {{ form.time.errors }}
+    </div>
+    <br/>
+    <div class="clearfix"></div>
+    <div class="w100 left">
+        Day
+    </div>
+    <div class="w250 left">
+        {{ form.day }}
+        {{ form.day.errors }}
+    </div>
+    <br/>
+    <div class="clearfix"></div>
+    <div class="w250 left">
+        Matcher: {{ match.matcher.get_full_name }}
+    </div>
+    <br/>
+    <div class="clearfix"></div>
+    <div class="w250 left">
+        {{ form.note|rows:"5" }}
+        {{ form.note.errors }}
+    </div>
+    <br/>
+    <div class="clearfix"></div>
+    <div class="w100 left">
+        Location
+    </div>
+    <div class="w250 left">
+        {{ form.location }}
+        {{ form.location.errors }}
+    </div>
+    <br/>
+    <div class="clearfix"></div>
+    {% csrf_token %}
+    <input type="submit" value="Save" />
+</form>
+<script type="text/javascript">
+    {% if not submitted %}
+    $('form').submit(function(event) {
+            event.preventDefault();
+            var dataStr = $('form').serialize();
+            $.ajax({
+                type: "POST",
+                url: "{% url match.views.edit_match match_id %}",
+                data: dataStr,
+                success: function(data) {
+                    $('form').parent().html(data);
+                }
+            });
+    });
+    {% else %}
+        // Saved
+        $('form').parent().dialog('close');
+    {% endif %}
+</script>
