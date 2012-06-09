@@ -118,7 +118,6 @@ INSTALLED_APPS = (
     'tutors',
     'match',
     'gunicorn',
-    'south',
     'tmsutil',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
