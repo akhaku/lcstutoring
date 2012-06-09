@@ -117,6 +117,7 @@ INSTALLED_APPS = (
     'tutees',
     'tutors',
     'match',
+    'south',
     'gunicorn',
     'tmsutil',
     # Uncomment the next line to enable the admin:
