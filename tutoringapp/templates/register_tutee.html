@@ -6,7 +6,9 @@
 </div>
 <form action="{% url tutees.views.register %}" class="tut-form" method="post" id="tutee-form">
     {% include "snippets/tutee_form.html" %}
-    <input type="submit" />
+    <div class="w100 left">
+        <input type="submit" class="form-but"/>
+    </div>
     <div class="clearfix"></div>
 </form>
 {% endblock body %}

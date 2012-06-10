@@ -1,7 +1,14 @@
 <form class="tut-form" action="{% url tutors.views.edit_tutor tutor_id %}" method="post">
 {% include "snippets/tutor_form.html" %}
 <div class="clearfix"></div>
-<input type="submit" value="Save" />
+<div class="w100 left">
+    <input type="submit" value="Save" class="form-but"/>
+</div>
+<div class="w100 left">
+    <button id="del-but" class="form-but">
+        {% if tutor.active %}Delete{% else %}Restore{% endif %}
+    </button>
+</div>
 </form>
 <script type="text/javascript">
 {% if not submitted %}
@@ -17,6 +24,22 @@
             }
         });
     });
+
+    $('#del-but').click(function() {
+        var conf = confirm('Are you sure you want to delete this tutor?');
+        if (conf) {
+            $.ajax({
+                type: "DELETE",
+                url: "{% url tutors.views.delete_tutor tutor_id %}",
+                success: function(data) {
+                    $('form').parent().dialog('close');
+                    $('.ui-state-active').prev().trigger('click');
+                }
+            });
+        }
+        return false;
+    });
+
 {% else %}
 $('form').parent().dialog('close');
 {% endif %}

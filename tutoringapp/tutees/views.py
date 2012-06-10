@@ -66,5 +66,14 @@ def edit_tutee(request, tutee_id):
     else:
         form = TuteeForm(instance=tutee)
     return render_to_response('edit_tutee.html',
-            {'form': form, 'tutee_id': tutee_id, 'submitted': submitted },
+            {'form': form, 'tutee_id': tutee_id, 'tutee': tutee,
+                'submitted': submitted },
         context_instance=RequestContext(request))
+
+@ajax_login_required
+def delete_tutee(request, tutee_id=None):
+    tutee = get_object_or_404(Tutee, id=tutee_id)
+    if request.method == "DELETE":
+        tutee.active = (tutee.active + 1)%2
+        tutee.save()
+    return HttpResponse("<h1>success</h1>")

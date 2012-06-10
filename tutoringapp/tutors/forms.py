@@ -10,7 +10,7 @@ class TutorForm(TmsModelForm):
 
     class Meta:
         model = Tutor
-        exclude = ('added_on', 'active',)
+        exclude = ('added_on','active',)
 
     def clean_first_name(self):
         name = self.cleaned_data.get('first_name')

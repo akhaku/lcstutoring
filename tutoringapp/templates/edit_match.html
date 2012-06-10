@@ -3,19 +3,24 @@
     {% if form.non_field_errors %}
     <ul class="errorlist">{{ form.non_field_errors.as_ul }}</ul>
     {% endif %}
-    <div>
-        Tutor: {{ match.tutor.get_full_name }}
+    <div class="w100 left">
+        Tutor:
     </div>
-    <div>
-        Tutee: {{ match.tutee.get_child_full_name }}
+    <div class="w250 left">
+        {{ match.tutor.get_full_name }}
     </div>
+    <div class="w100 left">
+        Tutee:
+    </div>
+    <div class="w250 left">
+        {{ match.tutee.get_child_full_name }}
+    </div>
+    <div class="clearfix"></div><br/>
     <div class="w100 left">Time</div>
     <div class="w250 left">
         {{ form.time }}
         {{ form.time.errors }}
     </div>
-    <br/>
-    <div class="clearfix"></div>
     <div class="w100 left">
         Day
     </div>
@@ -23,19 +28,8 @@
         {{ form.day }}
         {{ form.day.errors }}
     </div>
-    <br/>
     <div class="clearfix"></div>
-    <div class="w250 left">
-        Matcher: {{ match.matcher.get_full_name }}
-    </div>
     <br/>
-    <div class="clearfix"></div>
-    <div class="w250 left">
-        {{ form.note|rows:"5" }}
-        {{ form.note.errors }}
-    </div>
-    <br/>
-    <div class="clearfix"></div>
     <div class="w100 left">
         Location
     </div>
@@ -43,10 +37,29 @@
         {{ form.location }}
         {{ form.location.errors }}
     </div>
+    <div class="w100 left">
+        Matcher:
+    </div>
+    <div class="w250 left">
+        {{ match.matcher.get_full_name }}
+    </div>
+    <div class="clearfix"></div>
+    <br/>
+    <div class="w250 left">
+        {{ form.note|rows:"5" }}
+        {{ form.note.errors }}
+    </div>
+    <br/>
+    <div class="clearfix"></div>
     <br/>
     <div class="clearfix"></div>
     {% csrf_token %}
-    <input type="submit" value="Save" />
+    <div class="w100 left">
+        <input type="submit" value="Save" class="form-but"/>
+    </div>
+    <div class="w100 left">
+        <button id="del-but" class="form-but">Delete</button>
+    </div>
 </form>
 <script type="text/javascript">
     {% if not submitted %}
@@ -61,6 +74,20 @@
                     $('form').parent().html(data);
                 }
             });
+    });
+    $('#del-but').click(function() {
+        var conf = confirm('Are you sure you want to delete this match?');
+        if (conf) {
+            $.ajax({
+                type: "DELETE",
+                url: "{% url match.views.delete_match match_id %}",
+                success: function(data) {
+                    $('form').parent().dialog('close');
+                    dataTable.fnReloadAjax('{% url match.views.matches_json %}')
+                }
+            });
+        }
+        return false;
     });
     {% else %}
         // Saved

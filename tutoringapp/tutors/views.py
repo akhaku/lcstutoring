@@ -68,6 +68,14 @@ def edit_tutor(request, tutor_id=None):
     else:
         form = TutorForm(instance=tutor)
     return render_to_response('edit_tutor.html',
-            {'form': form, 'tutor_id': tutor_id, 'submitted': submitted },
+            {'form': form, 'tutor': tutor, 'tutor_id': tutor_id,
+                'submitted': submitted },
         context_instance=RequestContext(request))
 
+@ajax_login_required
+def delete_tutor(request, tutor_id=None):
+    tutor = get_object_or_404(Tutor, id=tutor_id)
+    if request.method == "DELETE":
+        tutor.active = (tutor.active + 1)%2
+        tutor.save()
+    return HttpResponse("<h1>success</h1>")

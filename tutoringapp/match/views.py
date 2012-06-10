@@ -77,3 +77,10 @@ def edit_match(request, match_id=None):
                 'submitted': submitted},
             context_instance=RequestContext(request))
 
+@ajax_login_required
+def delete_match(request, match_id=None):
+    match = get_object_or_404(Match, id=match_id)
+    deleted = True
+    if request.method == "DELETE":
+        match.delete()
+    return HttpResponse("<h1>Success</h1>")

@@ -6,4 +6,6 @@ urlpatterns = patterns('',
     url(r'^json/(\w+)/$', 'tutors.views.tutors_json'),
     url(r'^edit/$', 'tutors.views.edit_tutor'),
     url(r'^edit/(\d+)/$', 'tutors.views.edit_tutor'),
+    url(r'^remove/$', 'tutors.views.delete_tutor'),
+    url(r'^remove/(\d+)/$', 'tutors.views.delete_tutor'),
 )
