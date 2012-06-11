@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block body %}
+{% for response in responses %}
+<div class="response">
+    <div class="w250 left bold">{{ response.name }}</div>
+    <div class="w250 left italic">{{ response.description }}</div>
+    <div class="clearfix"></div>
+    <div>Last updated by {{ response.created_by.get_full_name }} at
+        {{ response.last_updated }}.
+        <a href="{{ response.get_edit_url }}">Edit</a>
+        <a href="{{ response.get_delete_url }}" class="response-delete">Delete</a>
+    </div>
+    <div class="clearfix"></div><br/>
+{{ response.response|safe }}
+<br/>
+<br/>
+</div>
+{% endfor %}
+{% endblock body %}
+{% block extrascript %}
+<script type="text/javascript">
+    responseDeleteHandlers();
+</script>
+{% endblock extrascript %}

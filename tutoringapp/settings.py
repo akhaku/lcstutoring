@@ -117,6 +117,7 @@ INSTALLED_APPS = (
     'tutees',
     'tutors',
     'match',
+    'response',
     'south',
     'gunicorn',
     'tmsutil',

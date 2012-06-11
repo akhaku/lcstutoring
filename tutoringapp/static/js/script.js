@@ -52,6 +52,25 @@ function matchEditHandlers(base_url, reloadUrl) {
     });
 }
 
+function responseDeleteHandlers() {
+    $('.response-delete').click(function(event) {
+        event.preventDefault();
+        var url = $(this).attr('href');
+        var conf = confirm("Are you sure you want to delete this response?");
+        var resp = $(this).closest('.response');
+        if (conf) {
+            $.ajax({
+                type: "DELETE",
+                url: url,
+                success: function(data) {
+                    resp.slideUp();
+                }
+            });
+        }
+        return false;
+    });
+}
+
 function tutorEditHandlers(base_url) {
     noteSlideHandler();
     $('table.data tbody tr td').dblclick(function() {

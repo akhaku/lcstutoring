@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block body %}
+<h2>Edit Response</h2>
+<form class="tut-form" action="{% url response.views.edit_response response_id %}" method="post">
+    {% include "snippets/response_form.html" %}
+    <br/>
+    <input type="submit" class="form-but" value="Save" />
+</form>
+{% endblock body %}
+{% block extrascript %}
+<script type="text/javascript"
+    src="{{MEDIA_URL}}plugins/cleditor/jquery.cleditor.min.js">
+</script>
+<script type="text/javascript">
+    $(function() { $('#id_response').cleditor(); });
+</script>
+{% endblock extrascript %}
+{% block extrastyle %}
+    <link rel="stylesheet" type="text/css"
+        href="{{MEDIA_URL}}plugins/cleditor/jquery.cleditor.css" />
+{% endblock extrastyle %}

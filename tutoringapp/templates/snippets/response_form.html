@@ -1,0 +1,16 @@
+
+<div class="w100 left">Name</div>
+<div class="w250 left">
+    {{ form.name }}
+    {{ form.name.errors }}
+</div>
+<div class="w100 left">Description</div>
+<div class="w250 left">
+    {{ form.description }}
+    {{ form.description.errors }}
+</div>
+<div class="clearfix"></div>
+<br/>
+{{ form.response }}
+<div class="clearfix"></div>
+{% csrf_token %}

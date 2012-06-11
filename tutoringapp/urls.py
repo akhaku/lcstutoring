@@ -8,6 +8,7 @@ urlpatterns = patterns('',
         url(r'^tutors/', include('tutors.urls') ),
         url(r'^tutees/', include('tutees.urls') ),
         url(r'^matches/', include('match.urls') ),
+        url(r'^respond/', include('response.urls') ),
         # Serve static assets for dev
         url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': settings.MEDIA_ROOT}),

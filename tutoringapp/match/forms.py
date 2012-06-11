@@ -1,8 +1,8 @@
 from django.forms import ValidationError
+from match.models import Match
 from tmsutil.forms import TmsModelForm
 from tmsutil.constants import DAY_CHOICES
 from tmsutil.timewidget import SelectTimeWidget
-from match.models import Match
 
 class MatchForm(TmsModelForm):
     

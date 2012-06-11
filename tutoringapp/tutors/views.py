@@ -26,7 +26,7 @@ def register(request):
             messages.error(request, "Error adding tutor, please see errors below.")
     else:
         form = TutorForm
-    return render_to_response('register_tutor.html', {
+    return render_to_response('tutors/register_tutor.html', {
         'form':form,
         'tutor_or_tutee': 'tutor',
         }, context_instance=RequestContext(request))
@@ -34,7 +34,7 @@ def register(request):
 @login_required
 def all_tutors(request):
     all_tutors = Tutor.objects.filter(active=True).order_by('-added_on')
-    return render_to_response('all_tutors.html', {
+    return render_to_response('tutors/all_tutors.html', {
         'tutors': all_tutors,
         }, context_instance=RequestContext(request))
 
@@ -52,7 +52,7 @@ def tutors_json(request, which):
     if which == "available":
         all_tutors = Tutor.objects.filter(active=True).\
                 exclude(id__in=matched_tutor_ids).order_by('-added_on')
-    return render_to_response('tutors_ajax.html', {
+    return render_to_response('tutors/tutors_ajax.html', {
         'tutors': all_tutors,
         }, context_instance=RequestContext(request))
 
@@ -67,7 +67,7 @@ def edit_tutor(request, tutor_id=None):
             form.save()
     else:
         form = TutorForm(instance=tutor)
-    return render_to_response('edit_tutor.html',
+    return render_to_response('tutors/edit_tutor.html',
             {'form': form, 'tutor': tutor, 'tutor_id': tutor_id,
                 'submitted': submitted },
         context_instance=RequestContext(request))

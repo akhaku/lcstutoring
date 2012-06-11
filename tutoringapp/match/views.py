@@ -14,14 +14,14 @@ import logging
 @login_required
 def all_matches(request):
     matches = Match.objects.filter(active=True).order_by('-added_on')
-    return render_to_response('all_matches.html', {
+    return render_to_response('match/all_matches.html', {
         'matches': matches,
         }, context_instance=RequestContext(request))
 
 @login_required
 def matches_json(request):
     matches = Match.objects.filter(active=True).order_by('-added_on')
-    return render_to_response('matches_ajax.html', {
+    return render_to_response('match/matches_ajax.html', {
         'matches': matches,
         }, context_instance=RequestContext(request))
 
@@ -33,7 +33,7 @@ def new_match(request):
             flat=True)
     available_tutors = Tutor.objects.filter(active=True).exclude(id__in=matched_tutor_ids)
     available_tutees = Tutee.objects.filter(active=True).exclude(id__in=matched_tutee_ids)
-    return render_to_response('new_match.html', {
+    return render_to_response('match/new_match.html', {
         'tutors': available_tutors,
         'tutees': available_tutees,
         }, context_instance=RequestContext(request))
@@ -72,7 +72,7 @@ def edit_match(request, match_id=None):
             form.save()
     else:
         form = MatchForm(instance=match)
-    return render_to_response('edit_match.html',
+    return render_to_response('match/edit_match.html',
             {'form': form, 'match_id': match_id, 'match': match,
                 'submitted': submitted},
             context_instance=RequestContext(request))
@@ -80,7 +80,6 @@ def edit_match(request, match_id=None):
 @ajax_login_required
 def delete_match(request, match_id=None):
     match = get_object_or_404(Match, id=match_id)
-    deleted = True
     if request.method == "DELETE":
         match.delete()
     return HttpResponse("<h1>Success</h1>")

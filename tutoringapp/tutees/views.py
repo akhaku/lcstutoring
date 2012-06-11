@@ -25,7 +25,7 @@ def register(request):
             messages.error(request, "Error adding tutee, please see errors below.")
     else:
         form = TuteeForm
-    return render_to_response('register_tutee.html', {
+    return render_to_response('tutees/register_tutee.html', {
         'form':form,
         'tutor_or_tutee': 'tutee',
         }, context_instance=RequestContext(request))
@@ -33,7 +33,7 @@ def register(request):
 @login_required
 def all_tutees(request):
     tutees = Tutee.objects.filter(active=True).order_by('-added_on')
-    return render_to_response('all_tutees.html',{
+    return render_to_response('tutees/all_tutees.html',{
         'tutees': tutees
         }, context_instance=RequestContext(request))
 
@@ -50,7 +50,7 @@ def tutees_json(request, which):
     if which == "unavailable":
         all_tutees = Tutee.objects.filter(active=True,id__in=matched_tutee_ids).\
                 order_by('-added_on')
-    return render_to_response('tutees_ajax.html', {
+    return render_to_response('tutees/tutees_ajax.html', {
         'tutees': all_tutees,
         }, context_instance=RequestContext(request))
 
@@ -65,7 +65,7 @@ def edit_tutee(request, tutee_id):
             form.save()
     else:
         form = TuteeForm(instance=tutee)
-    return render_to_response('edit_tutee.html',
+    return render_to_response('tutees/edit_tutee.html',
             {'form': form, 'tutee_id': tutee_id, 'tutee': tutee,
                 'submitted': submitted },
         context_instance=RequestContext(request))
