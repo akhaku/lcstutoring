@@ -6,4 +6,5 @@ urlpatterns = patterns('',
     url(r'^create/$', 'response.views.new_response'),
     url(r'^edit/(\d+)/$', 'response.views.edit_response'),
     url(r'^delete/(\d+)/$', 'response.views.delete_response'),
+    url(r'^respond/$', 'response.views.respond'),
     )

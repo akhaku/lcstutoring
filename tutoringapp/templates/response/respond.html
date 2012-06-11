@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block body %}
+<h1>Respond</h1>
+<form action="{% url response.views.respond %}" id="get-response" method="get">
+<input id="tutee-resp" class="resp-autocomplete"
+    rel="{% url tutees.views.search_ajax %}"/>
+<input id="tutee-resp-val" name="tutee" type="hidden"/>
+
+<input id="tutor-resp" class="resp-autocomplete"
+    rel="{% url tutors.views.search_ajax %}"/>
+<input id="tutor-resp-val" name="tutor" type="hidden"/>
+<select name="response">
+    {% for response in responses %}
+    <option value="{{response.id}}">
+        {{response.name}}
+    </option>
+    {% endfor %}
+</select>
+<button>Get response</button>
+<br/>
+<div id="response-div" class="ui-corner-all"></div>
+{% endblock body %}
+{% block extrascript %}
+<script type="text/javascript">
+    responseAutocompleteInit();
+    getResponseInit();
+</script>
+{% endblock extrascript %}

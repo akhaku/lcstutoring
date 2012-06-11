@@ -13,14 +13,10 @@
 {% if not submitted %}
     $('form').submit(function(event) {
         event.preventDefault();
-        var dataStr = $('form').serialize();
-        $.ajax({
-            type: "POST",
-            url: "{% url tutees.views.edit_tutee tutee_id %}",
-            data: dataStr,
-            success: function(data) {
+        var dataStr = ;
+        $.post("{% url tutees.views.edit_tutee tutee_id %}",
+            $('form').serialize(), function(data) {
                 $('form').parent().html(data);
-            }
         });
     });
 

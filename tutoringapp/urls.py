@@ -3,6 +3,7 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
         url(r'^$', 'account.views.home_page'),
+        url(r'^manual/$', 'tmsutil.views.download_manual' ),
         url(r'^login/$', 'account.views.login_page' ),
         url(r'^account/', include('account.urls') ),
         url(r'^tutors/', include('tutors.urls') ),

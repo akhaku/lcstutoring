@@ -126,6 +126,40 @@ function noteSlideHandler() {
     $('.data tr td:last-child').height('30');
 }
 
+function getResponseInit() {
+    var form = $('#get-response');
+    form.submit(function(event) {
+        event.preventDefault();
+        var dataStr = form.serialize();
+        var the_url = form.attr('action');
+        $.get(the_url, dataStr, function(data) {
+            $('#response-div').html(data);
+        });
+    });
+}
+
+function responseAutocompleteInit() {
+    $.each($('.resp-autocomplete'), function(i, elem) {
+        var the_url = $(elem).attr('rel')
+        $.getJSON(the_url, function(data) {
+            $(elem).autocomplete({
+                source: data,
+                minLength: 2,
+                delay: 0,
+                select: function(e, v) {
+                           $(elem).val(v.item.label);
+                           return false;
+                       },
+                focus: function(e, v) {
+                           $(elem).val(v.item.label);
+                           $(elem).next().val(v.item.value);
+                           return false;
+                       },
+            });
+        });
+    });
+}
+
 /* Datatables plugin */
 $.fn.dataTableExt.oApi.fnReloadAjax = function ( oSettings, sNewSource, fnCallback, bStandingRedraw )
 {

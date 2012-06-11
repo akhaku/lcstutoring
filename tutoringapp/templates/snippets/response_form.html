@@ -13,4 +13,39 @@
 <br/>
 {{ form.response }}
 <div class="clearfix"></div>
+<br/>
+<table class="ui-corner-all">
+    <tr>
+        <td colspan="6">
+            In place of a person's details, you can use the following:
+        </td>
+    </tr>
+    <tr>
+        <td>[cfname]</td><td>Child's first name</td>
+        <td> | &nbsp;&nbsp;[clname]</td><td>Child's last name</td>
+        <td> | &nbsp;&nbsp;[pemail]</td><td>Tutee's email address</td>
+    </tr>
+    <tr>
+        <td>[pfname]</td><td>Parent's first name</td>
+        <td> | &nbsp;&nbsp;[plname]</td><td>Parent's last name</td>
+        <td> | &nbsp;&nbsp;[grade]</td><td>Child's grade</td>
+    </tr>
+    <tr>
+        <td>[hphone]</td><td>Parent's home phone</td>
+        <td> | &nbsp;&nbsp;[cphone]</td><td>Parent's cell phone</td>
+        <td> | &nbsp;&nbsp;[ssubjects]</td><td>Child's subjects</td>
+    </tr>
+    <tr>
+        <td>[fname]</td><td>Tutor's first name</td>
+        <td> | &nbsp;&nbsp;[lname]</td><td>Tutor's last name</td>
+        <td> | &nbsp;&nbsp;[semail]</td><td>Tutor's email address</td>    </tr>
+    <tr>
+        <td>[tphone]</td><td>Tutor's phone</td>
+        <td> | &nbsp;&nbsp;[tyear]</td><td>Tutor's year</td>
+        <td> | &nbsp;&nbsp;[manual] and [/manual]</td><td>Around a link to the manual</td>
+    </tr>
+    <tr>
+        <td colspan="6">Each will be replaced by the appropriate data.</td>
+    </tr>
+</table>
 {% csrf_token %}

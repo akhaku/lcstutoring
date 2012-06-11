@@ -79,3 +79,12 @@ def delete_tutor(request, tutor_id=None):
         tutor.active = (tutor.active + 1)%2
         tutor.save()
     return HttpResponse("<h1>success</h1>")
+
+@ajax_login_required
+def search_ajax(request):
+    all_tutors = Tutor.objects.filter(active=True).order_by('-added_on')
+    all_tutors_json = []
+    for tutor in all_tutors:
+        all_tutors_json.append({'label': tutor.get_full_name(),
+            'value': tutor.id})
+    return HttpResponse(json.dumps(all_tutors_json))

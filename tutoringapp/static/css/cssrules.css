@@ -135,6 +135,11 @@ form input, form textarea {
     margin: 0px;
 }
 
+.ui-autocomplete {
+    max-height: 200px;
+    overflow: auto;
+}
+
 textarea {
     font-family: Helvetica, Arial;
 }
@@ -212,4 +217,10 @@ div#tutee-selected, div#tutor-selected {
 .response {
     padding: 5px;
     border-bottom: 2px dashed black;
+}
+
+#response-div {
+    padding: 10px;
+    border: 2px solid black;
+
 }

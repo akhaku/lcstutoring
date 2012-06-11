@@ -77,3 +77,12 @@ def delete_tutee(request, tutee_id=None):
         tutee.active = (tutee.active + 1)%2
         tutee.save()
     return HttpResponse("<h1>success</h1>")
+
+@ajax_login_required
+def search_ajax(request):
+    all_tutees = Tutee.objects.filter(active=True).order_by('-added_on')
+    all_tutees_json = []
+    for tutee in all_tutees:
+        all_tutees_json.append({'label': tutee.get_child_full_name(),
+            'value': tutee.id})
+    return HttpResponse(json.dumps(all_tutees_json))

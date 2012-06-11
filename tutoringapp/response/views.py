@@ -6,6 +6,9 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from response.forms import ResponseForm
 from response.models import Response
+from response.replacements import manual_replace, tutee_replace, tutor_replace
+from tutors.models import Tutor
+from tutees.models import Tutee
 
 def all_responses(request):
     responses = Response.objects.all()
@@ -56,3 +59,22 @@ def delete_response(request, response_id):
     if request.method == "DELETE":
         response.delete()
     return HttpResponse("<h1>Success</h1>")
+
+def respond(request):
+    if request.is_ajax():
+        response_id = request.GET.get('response')
+        response = Response.objects.get(id=response_id).response
+        tutor_id = request.GET.get('tutor')
+        if tutor_id != "":
+            tutor = Tutor.objects.get(id=tutor_id)
+            response = tutor_replace(response, tutor)
+        tutee_id = request.GET.get('tutee')
+        if tutee_id != "":
+            tutee = Tutee.objects.get(id=tutee_id)
+            response = tutee_replace(response, tutee)
+        response = manual_replace(response)
+        return HttpResponse(response)
+    responses = Response.objects.all()
+    return render_to_response('response/respond.html', {
+        'responses': responses
+        }, context_instance=RequestContext(request))
