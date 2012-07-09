@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block body %}
+<a href="{% url response.views.new_response %}">Create response</a>
+<a href="{% url response.views.all_responses %}">All responses</a>
 <h1>Respond</h1>
 <form action="{% url response.views.respond %}" id="get-response" method="get">
 <input id="tutee-resp" class="resp-autocomplete"

@@ -110,6 +110,7 @@ form input, form textarea {
     padding: 5px;
     background-color: #0B0B3B;
     color: #FFFFFF;
+    cursor: pointer;
     border-radius: 10px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
@@ -221,6 +222,5 @@ div#tutee-selected, div#tutor-selected {
 
 #response-div {
     padding: 10px;
-    border: 2px solid black;
 
 }

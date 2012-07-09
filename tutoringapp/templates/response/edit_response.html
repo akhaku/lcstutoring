@@ -5,6 +5,9 @@
     {% include "snippets/response_form.html" %}
     <br/>
     <input type="submit" class="form-but" value="Save" />
+    <a href="{% url response.views.all_responses %}">
+        <input type="reset" class="form-but" value="Cancel" />
+    </a>
 </form>
 {% endblock body %}
 {% block extrascript %}
