@@ -1,4 +1,8 @@
 TODO:
+Next steps: Get app options and admin functionality complete
+Send emails using options
+Styling
+
 Change media_url on prod to amazon s3
 Setup script to push to amazon s3
 don't forget to add css for errorlist class
