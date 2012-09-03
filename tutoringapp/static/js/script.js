@@ -75,10 +75,10 @@ function tutorEditHandlers(base_url) {
     noteSlideHandler();
     $('table.data tbody tr td').dblclick(function() {
         var dialog = $('<div style="display:none" title="Edit Tutor"></div>').
-        appendTo('body');
+            appendTo('body');
         var tutor_id = $(this).parent().attr('id');
         var edit_url = base_url+""+tutor_id+"/";
-        dialog.load(edit_url, function (responseText, textStatus, XMLHttpRequest) {
+        dialog.load(edit_url, function() {
             dialog.dialog({
                 modal: true,
                 width: 800,
@@ -96,10 +96,11 @@ function tuteeEditHandlers(base_url) {
     noteSlideHandler();
     $('table.data tbody tr td').dblclick(function() {
         var dialog = $('<div style="display:none" title="Edit Tutee"></div>').
-        appendTo('body');
+            appendTo('body');
         var tutee_id = $(this).parent().attr('id');
-        url = base_url+""+tutee_id+"/";
-        dialog.load(url, function (responseText, textStatus, XMLHttpRequest) {
+        var edit_url = base_url+""+tutee_id+"/";
+        console.log(edit_url);
+        dialog.load(edit_url, function() {
             dialog.dialog({
                 modal: true,
                 width: 800,

@@ -13,7 +13,6 @@
 {% if not submitted %}
     $('form').submit(function(event) {
         event.preventDefault();
-        var dataStr = ;
         $.post("{% url tutees.views.edit_tutee tutee_id %}",
             $('form').serialize(), function(data) {
                 $('form').parent().html(data);

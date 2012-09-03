@@ -1,12 +1,13 @@
 from datetime import datetime
+import json
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
-import json
 from match.models import Match
+from notification.models import Notification
 from tmsutil.decorators import ajax_login_required
 from tutees.forms import TuteeForm
 from tutees.models import Tutee
@@ -19,6 +20,7 @@ def register(request):
             tutee.added_on = datetime.now()
             tutee.active = True
             tutee.save()
+            Notification.objects.register_tutee(tutee)
             messages.success(request, "Tutee successfully added.")
             return HttpResponseRedirect(reverse('tutees.views.register',args=[]))
         else:
@@ -63,6 +65,7 @@ def edit_tutee(request, tutee_id):
         if form.is_valid():
             submitted = True
             form.save()
+            Notification.objects.edit_tutee(request.user, tutee)
     else:
         form = TuteeForm(instance=tutee)
     return render_to_response('tutees/edit_tutee.html',
@@ -76,6 +79,8 @@ def delete_tutee(request, tutee_id=None):
     if request.method == "DELETE":
         tutee.active = (tutee.active + 1)%2
         tutee.save()
+        if tutee.active is 0: # Ensure deactivated tutee
+            Notification.objects.delete_tutee(request.user, tutee)
     return HttpResponse("<h1>success</h1>")
 
 @ajax_login_required

@@ -14,14 +14,9 @@
 {% if not submitted %}
     $('form').submit(function(event) {
         event.preventDefault();
-        var dataStr = $('form').serialize();
-        $.ajax({
-            type: "POST",
-            url: "{% url tutors.views.edit_tutor tutor_id %}",
-            data: dataStr,
-            success: function(data) {
+        $.post("{% url tutors.views.edit_tutor tutor_id %}",
+            $('form').serialize(), function(data) {
                 $('form').parent().html(data);
-            }
         });
     });
 

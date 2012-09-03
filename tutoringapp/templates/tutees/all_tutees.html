@@ -49,7 +49,7 @@ $(document).ready(function() {
 
 $('#all-tutees').click(function() {
         dataTable = $('table#tutees').dataTable().
-        fnReloadAjax('{% url tutees.views.tutees_json "all" %}');
+          fnReloadAjax('{% url tutees.views.tutees_json "all" %}');
         return false;
 });
 

@@ -10,6 +10,7 @@ class Response(models.Model):
     response = models.TextField(blank=True,
             help_text="Response")
     created_by = models.ForeignKey(User)
+    active = models.BooleanField(default=True)
     last_updated = models.DateTimeField(blank=False)
 
     def get_edit_url(self):
@@ -17,3 +18,6 @@ class Response(models.Model):
 
     def get_delete_url(self):
         return reverse('response.views.delete_response', args=[self.id])
+
+    def __unicode__(self):
+        return self.name

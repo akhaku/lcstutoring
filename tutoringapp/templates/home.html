@@ -1,4 +1,8 @@
 {% extends "base.html" %}
 {% block body %}
 Welcome {{user.first_name}}
+{% for notification in notifications %}
+  <br/>
+  {{ notification }}
+{% endfor %}
 {% endblock body %}

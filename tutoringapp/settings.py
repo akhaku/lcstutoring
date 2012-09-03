@@ -114,13 +114,14 @@ INSTALLED_APPS = (
     'PIL',
     'account',
     'captcha',
-    'tutees',
-    'tutors',
+    'gunicorn',
     'match',
+    'notification',
     'response',
     'south',
-    'gunicorn',
     'tmsutil',
+    'tutees',
+    'tutors',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

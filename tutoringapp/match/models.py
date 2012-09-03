@@ -19,3 +19,5 @@ class Match(models.Model):
     note = models.TextField(blank=True,
             help_text="Any extra information.")
 
+    def __unicode__(self):
+      return "%s and %s" % (self.tutor, self.tutee)

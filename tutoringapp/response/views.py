@@ -4,14 +4,15 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
+from notification.models import Notification
 from response.forms import ResponseForm
 from response.models import Response
 from response.replacements import manual_replace, tutee_replace, tutor_replace
-from tutors.models import Tutor
 from tutees.models import Tutee
+from tutors.models import Tutor
 
 def all_responses(request):
-    responses = Response.objects.all()
+    responses = Response.objects.filter(active=True)
     return render_to_response('response/all_responses.html', {
         'responses': responses,
         }, context_instance=RequestContext(request))
@@ -23,7 +24,9 @@ def new_response(request):
             response = form.save(commit=False)
             response.last_updated = datetime.now()
             response.created_by = request.user
+            response.active = 1
             response.save()
+            Notification.objects.create_response(request.user, response)
             messages.success(request, "Added response")
             return HttpResponseRedirect(reverse('response.views.new_response',args=[]))
         else:
@@ -43,6 +46,7 @@ def edit_response(request, response_id):
             response.last_updated = datetime.now()
             response.created_by = request.user
             response.save()
+            Notification.objects.edit_response(request.user, response)
             messages.success(request, "Response saved.")
             return HttpResponseRedirect(reverse(
                 'response.views.all_responses', args=[]))
@@ -57,7 +61,9 @@ def edit_response(request, response_id):
 def delete_response(request, response_id):
     response = get_object_or_404(Response, id=response_id)
     if request.method == "DELETE":
-        response.delete()
+        response.active=False
+        response.save()
+        Notification.objects.delete_response(request.user, response)
     return HttpResponse("<h1>Success</h1>")
 
 def respond(request):

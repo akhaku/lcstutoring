@@ -36,19 +36,19 @@
 {% block extrascript %}
 <script type="text/javascript">
 $(document).ready(function() {
-$('table#tutors').dataTable({
-    "bProcessing": true,
-    "sAjaxSource": "{% url tutors.views.tutors_json "available" %}",
-    "fnDrawCallback": function(oSettings) {
-        tutorEditHandlers("{% url tutors.views.edit_tutor %}");
-    }
-});
-$('#selection').buttonset();
+  $('table#tutors').dataTable({
+      "bProcessing": true,
+      "sAjaxSource": "{% url tutors.views.tutors_json "available" %}",
+      "fnDrawCallback": function(oSettings) {
+          tutorEditHandlers("{% url tutors.views.edit_tutor %}");
+      }
+  });
+  $('#selection').buttonset();
 });
 
 $('#all-tutors').click(function() {
     dataTable = $('table#tutors').dataTable().
-    fnReloadAjax('{% url tutors.views.tutors_json "all" %}');
+      fnReloadAjax('{% url tutors.views.tutors_json "all" %}');
     return false;
 });
 

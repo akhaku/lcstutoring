@@ -1,13 +1,14 @@
 from datetime import datetime
+import json
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
 from django.core.serializers import serialize
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
-import json
 from match.models import Match
+from notification.models import Notification
 from tmsutil.decorators import ajax_login_required
 from tutors.forms import TutorForm
 from tutors.models import Tutor
@@ -20,6 +21,7 @@ def register(request):
             tutor.added_on = datetime.now()
             tutor.active = True
             tutor.save()
+            Notification.objects.register_tutor(tutor)
             messages.success(request, "Tutor successfully added.")
             return HttpResponseRedirect(reverse('tutors.views.register',args=[]))
         else:
@@ -65,6 +67,7 @@ def edit_tutor(request, tutor_id=None):
         if form.is_valid():
             submitted = True
             form.save()
+            Notification.objects.edit_tutor(request.user, tutor)
     else:
         form = TutorForm(instance=tutor)
     return render_to_response('tutors/edit_tutor.html',
@@ -78,6 +81,8 @@ def delete_tutor(request, tutor_id=None):
     if request.method == "DELETE":
         tutor.active = (tutor.active + 1)%2
         tutor.save()
+        if tutor.active is 0: # Make sure deactivated tutor
+            Notification.objects.delete_tutor(request.user, tutor)
     return HttpResponse("<h1>success</h1>")
 
 @ajax_login_required
