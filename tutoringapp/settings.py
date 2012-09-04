@@ -1,5 +1,6 @@
 # Django settings for tutoringapp project.
 import os 
+import dj_database_url
 from captcha_settings import *
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -150,6 +151,8 @@ LOGGING = {
         },
     }
 }
+
+DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
 
 try:
     EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
