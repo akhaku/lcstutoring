@@ -7,8 +7,6 @@ handler500 = 'tmsutil.views.handler500'
 
 urlpatterns = patterns('',
         url(r'^$', 'account.views.home_page'),
-        url(r'^favicon.ico(?P<path>)$', 'django.views.static.serve',
-            {'document_root': "%s/img/favicon.ico" % settings.MEDIA_ROOT}),
         url(r'^manual/$', 'tmsutil.views.download_manual' ),
         url(r'^login/$', 'account.views.login_page' ),
         url(r'^account/', include('account.urls') ),
