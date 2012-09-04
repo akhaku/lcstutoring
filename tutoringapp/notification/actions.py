@@ -15,3 +15,5 @@ DELETED_RESPONSE = "deleted response"
 MATCHED = "matched"
 EDITED_MATCH = "edited match"
 DELETED_MATCH = "removed match"
+
+CREATED_USER = "created user"

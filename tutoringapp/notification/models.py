@@ -1,6 +1,9 @@
 from time import strftime
 from django.db import models
-from notification import actions
+from tmsutil import send_mail
+from account.models import AppSetting
+from account import app_settings
+from notification import actions, email_strings as emails
 from tmsutil import model_to_key as m2k, key_to_model as k2m
 
 class NotificationManager(models.Manager):
@@ -11,10 +14,16 @@ class NotificationManager(models.Manager):
     def register_tutee(self, ttee):
         Notification.objects.create(sender=m2k(ttee),
                 action=actions.REGISTERED_TUTEE)
+        if Appsetting.objects.get(name=app_settings.TUTEE_REG_EMAIL).value:
+            send_mail(ttee.email_address, emails.TUTEE_REG_SUBJECT,
+                    emails.TUTEE_REG_BODY, True)
 
     def register_tutor(self, ttor):
         Notification.objects.create(sender=m2k(ttor),
                 action=actions.REGISTERED_TUTOR)
+        if Appsetting.objects.get(name=app_settings.TUTOR_REG_EMAIL).value:
+            send_mail(ttor.email_address, emails.TUTOR_REG_SUBJECT,
+                    emails.TUTOR_REG_BODY, True)
 
     def edit_tutee(self, user, tutee):
         Notification.objects.create(sender=m2k(user), recipient=m2k(tutee),
@@ -55,6 +64,10 @@ class NotificationManager(models.Manager):
     def delete_match(self, user, match):
         Notification.objects.create(sender=m2k(user), recipient=m2k(match),
                 action=actions.DELETED_MATCH)
+
+    def create_user(self, user, new_user):
+        Notification.objects.create(sender=m2k(user), recipient=m2k(new_user),
+                action=actions.CREATED_RESPONSE)
 
 class Notification(models.Model):
     """ The base class for a notification. Should never be instantiated by any

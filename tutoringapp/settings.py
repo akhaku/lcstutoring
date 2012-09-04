@@ -152,6 +152,16 @@ LOGGING = {
 }
 
 try:
+    EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
+    EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
+except KeyError:
+    pass
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_FROM = "LCS Tutoring Coordinators <mail@lcstutoring.com>"
+LCS_EMAIL = "lcs.tutor@gmail.com"
+
+try:
     from settingslocal import *
 except ImportError:
     pass
