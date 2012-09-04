@@ -14,14 +14,14 @@ class NotificationManager(models.Manager):
     def register_tutee(self, ttee):
         Notification.objects.create(sender=m2k(ttee),
                 action=actions.REGISTERED_TUTEE)
-        if Appsetting.objects.get(name=app_settings.TUTEE_REG_EMAIL).value:
+        if AppSetting.objects.get(name=app_settings.TUTEE_REG_EMAIL).value:
             send_mail(ttee.email_address, emails.TUTEE_REG_SUBJECT,
                     emails.TUTEE_REG_BODY, True)
 
     def register_tutor(self, ttor):
         Notification.objects.create(sender=m2k(ttor),
                 action=actions.REGISTERED_TUTOR)
-        if Appsetting.objects.get(name=app_settings.TUTOR_REG_EMAIL).value:
+        if AppSetting.objects.get(name=app_settings.TUTOR_REG_EMAIL).value:
             send_mail(ttor.email_address, emails.TUTOR_REG_SUBJECT,
                     emails.TUTOR_REG_BODY, True)
 

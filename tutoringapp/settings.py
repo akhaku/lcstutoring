@@ -164,6 +164,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_FROM = "LCS Tutoring Coordinators <mail@lcstutoring.com>"
 LCS_EMAIL = "lcs.tutor@gmail.com"
+DEFAULT_FROM_EMAIL = EMAIL_FROM
 
 try:
     from settingslocal import *
