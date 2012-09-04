@@ -1,0 +1,23 @@
+<div id="notifications-list">
+    <div class="all-notifications">
+        {% for notification in notifications %}
+        <div>{{notification}}</div>
+        {% endfor %}
+    </div>
+    <div class="notification-links">
+        {% if is_prev %}
+            <a href="{{prev_link}}">&lt;Previous</a>
+        {% else %}
+            &lt; Previous
+        {% endif %}
+        {{ start }} - {{ end }}
+        {% if is_next %}
+            <a href="{{next_link}}">Next&gt;</a>
+        {% else %}
+            Next &gt;
+        {% endif %}
+    </div>
+</div>
+<script type="text/javascript">
+    notificationNextHandler();
+</script>

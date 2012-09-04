@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 {% block body %}
 Welcome {{user.first_name}}
-{% for notification in notifications %}
-  <br/>
-  {{ notification }}
-{% endfor %}
+<div id="all-notifs"></div>
 {% endblock body %}
+
+{% block extrascript %}
+<script type="text/javascript">
+  $('#all-notifs').load("{% url notification.views.view_notifications 0 %}");
+</script>
+{% endblock extrascript %}

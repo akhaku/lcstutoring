@@ -114,6 +114,14 @@ function tuteeEditHandlers(base_url) {
     });
 }
 
+function notificationNextHandler() {
+  $('.notification-links a').click(function(event) {
+      event.preventDefault();
+      var link = $(this).attr('href');
+      $("#notifications-list").load(link);
+  });
+}
+
 function noteSlideHandler() {
     $('.data tr td:last-child').each(function(index, elem) {
         $(elem).attr('rel', $(elem).height());

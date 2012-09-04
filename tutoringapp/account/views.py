@@ -5,14 +5,11 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from urllib import urlencode
-from notification.models import Notification
 
 def home_page(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('account.views.login_page', args=[]))
-    recent_notifications = Notification.objects.order_by('-date_time')
-    return render_to_response('home.html',
-            {'notifications': recent_notifications},
+    return render_to_response('home.html', {},
             context_instance=RequestContext(request))
 
 def login_page(request):

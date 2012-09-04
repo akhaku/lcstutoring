@@ -222,5 +222,14 @@ div#tutee-selected, div#tutor-selected {
 
 #response-div {
     padding: 10px;
+}
 
+#all-notifs {
+  width: 500px;
+}
+
+.all-notifications {
+  font-size: 13px;
+  min-height: 160px;
+  border: 1px solid black;
 }
