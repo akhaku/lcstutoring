@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 {% block body %}
 <div id="match-box">
-    <div id="tutor-box">Tutor:
-        <div id="tutor-selected"></div>
+    <div class="tut-drop-box" id="tutor-box">Tutor
+      <div class="cancel-tut">X</div>
+        <div class="tut-dropped-value" id="tutor-selected"></div>
     </div>
-    <div id="tutee-box">Tutee:
-        <div id="tutee-selected"></div>
+    <div class="tut-drop-box" id="tutee-box">Tutee
+      <div class="cancel-tut">X</div>
+        <div class="tut-dropped-value" id="tutee-selected"></div>
     </div>
     <textarea id="match-note" rows="2" cols="20" placeholder="Note"></textarea>
+    <br/>
     <button class="form-but" id="match-make">Make match</button>
     <div class="clearfix"></div>
-    <br/>
-    <br/>
 </div>
 <div class="tut-mini-wrapper right-dashed">
     <table class="data">
@@ -58,8 +59,11 @@
 
 {% block extrascript %}
 <script type="text/javascript">
+  $(document).ready(function() {
+    $('#matches-nav').addClass('selected');
     $('.data').dataTable();
     initMatchDragDrop();
+    initEmptyTutBox();
     $('button#match-make').click(function() {
             tutor_id = $('#tutor-selected').attr('rel');    
             tutee_id = $('#tutee-selected').attr('rel');    
@@ -79,5 +83,6 @@
                 }
             });
         });
+  });
 </script>
 {% endblock extrascript %}

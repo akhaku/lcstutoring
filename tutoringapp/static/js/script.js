@@ -122,6 +122,13 @@ function notificationNextHandler() {
   });
 }
 
+function initEmptyTutBox() {
+  $('.cancel-tut').click(function() {
+    var container = $(this).closest('.tut-drop-box');
+    $('.tut-dropped-value', container).html("");
+  });
+}
+
 function noteSlideHandler() {
     $('.data tr td:last-child').each(function(index, elem) {
         $(elem).attr('rel', $(elem).height());
@@ -143,6 +150,7 @@ function getResponseInit() {
         var the_url = form.attr('action');
         $.get(the_url, dataStr, function(data) {
             $('#response-div').html(data);
+            $('.response-div-header').css('display','inline-block');
         });
     });
 }

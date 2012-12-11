@@ -29,19 +29,19 @@
             {% if user.is_authenticated %}
             <ul id="nav">
                 <li>
-                    <a href="{% url tutors.views.all_tutors %}">Tutors</a>
+                    <a href="{% url tutors.views.all_tutors %}" id="tutors-nav">Tutors</a>
                 </li>
                 <li>
-                    <a href="{% url tutees.views.all_tutees %}">Tutees</a>
+                    <a href="{% url tutees.views.all_tutees %}" id="tutees-nav">Tutees</a>
                 </li>
                 <li>
-                    <a href="{% url match.views.all_matches %}">Matches</a>
+                    <a href="{% url match.views.all_matches %}" id="matches-nav">Matches</a>
                 </li>
                 <li>
-                    <a href="{% url response.views.respond %}">Responses</a>
+                    <a href="{% url response.views.respond %}" id="response-nav">Responses</a>
                 </li>
+              <div class="clearfix"></div>
             </ul>
-            <div class="clearfix"></div>
             {% endif %}
             <div id="content">
                 {% if messages %}

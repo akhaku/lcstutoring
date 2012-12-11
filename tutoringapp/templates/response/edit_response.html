@@ -15,7 +15,10 @@
     src="{{MEDIA_URL}}plugins/cleditor/jquery.cleditor.min.js">
 </script>
 <script type="text/javascript">
-    $(function() { $('#id_response').cleditor(); });
+  $(function() {
+    $('#id_response').cleditor();
+    $('#response-nav').addClass('selected');
+  });
 </script>
 {% endblock extrascript %}
 {% block extrastyle %}

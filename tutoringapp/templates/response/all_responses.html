@@ -19,6 +19,9 @@
 {% endblock body %}
 {% block extrascript %}
 <script type="text/javascript">
+  $(document).ready(function() {
+    $('#response-nav').addClass('selected');
+  });
     responseDeleteHandlers();
 </script>
 {% endblock extrascript %}
