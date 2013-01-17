@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% block body %}
 {% load day_display %}
-<a href="{% url match.views.new_match %}">New Match</a>
+<div class="crumbs">
+  <a href="{% url match.views.all_matches %}" class="selected">All Matches</a>
+  &#124;
+  <a href="{% url match.views.new_match %}">New Match</a>
+</div>
 <table id="matches" class="data">
     <thead>
         <tr>
@@ -27,9 +31,10 @@
             "bProcessing": true,
             "sAjaxSource": "{% url match.views.matches_json %}",
             "fnDrawCallback": function(oSettings) {
-            matchEditHandlers("{% url match.views.edit_match %}",
-                "{% url match.views.matches_json %}");
-            },
+              $('.dataTables_filter').after('<br/>');
+              matchEditHandlers("{% url match.views.edit_match %}",
+                  "{% url match.views.matches_json %}");
+            }
         });
         $('#matches-nav').addClass('selected');
     });

@@ -6,13 +6,13 @@
     </div>
     <div class="notification-links">
         {% if is_prev %}
-            <a href="{{prev_link}}">&lt;Previous</a>
+            <a href="{{prev_link}}" class="link">&lt;Previous</a>
         {% else %}
             &lt; Previous
         {% endif %}
         {{ start }} - {{ end }}
         {% if is_next %}
-            <a href="{{next_link}}">Next&gt;</a>
+            <a href="{{next_link}}" class="link">Next&gt;</a>
         {% else %}
             Next &gt;
         {% endif %}

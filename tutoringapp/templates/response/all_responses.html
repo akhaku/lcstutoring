@@ -1,5 +1,18 @@
 {% extends "base.html" %}
 {% block body %}
+<div class="crumbs">
+  <a href="{% url response.views.respond %}">
+    Respond
+  </a>
+  &#124;
+  <a href="{% url response.views.all_responses %}" class="selected">
+    All responses
+  </a>
+  &#124;
+  <a href="{% url response.views.new_response %}">
+    Create response
+  </a>
+</div>
 {% for response in responses %}
 <div class="response">
     <div class="w250 left bold">{{ response.name }}</div>

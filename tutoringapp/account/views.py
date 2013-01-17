@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.urlresolvers import reverse
@@ -9,8 +10,14 @@ from urllib import urlencode
 
 def home_page(request):
     if not request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('account.views.login_page', args=[]))
+        return HttpResponseRedirect(reverse('account.views.login_page',
+            args=[]))
     return render_to_response('home.html', {},
+            context_instance=RequestContext(request))
+
+@login_required
+def management(request):
+    return render_to_response('account/management.html', {},
             context_instance=RequestContext(request))
 
 def login_page(request):

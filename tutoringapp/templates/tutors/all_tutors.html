@@ -1,17 +1,13 @@
 {% extends "base.html" %}
 {% block body %}
-<div id="selection" class="radio-buttons">
-    <input type="radio" id="available-tutors" checked="checked" name="radio" />
-    <label for="available-tutors">Available</label>
-
-    <input type="radio" id="unavailable-tutors" name="radio" />
-    <label for="unavailable-tutors">Unavailable</label>
-
-    <input type="radio" id="all-tutors" name="radio" />
-    <label for="all-tutors">All</label>
-
-    <input type="radio" id="hidden-tutors" name="radio" />
-    <label for="hidden-tutors">Hidden</label>
+<div class="crumbs">
+  <a href="{% url tutors.views.tutors_json "available" %}" class="selected">Available</a>
+  &#124;
+  <a href="{% url tutors.views.tutors_json "unavailable" %}">Unavailable</a>
+  &#124;
+  <a href="{% url tutors.views.tutors_json "all" %}">All</a>
+  &#124;
+  <a href="{% url tutors.views.tutors_json "hidden" %}">Hidden</a>
 </div>
 
 <table id="tutors" class="data">
@@ -37,38 +33,21 @@
 <script type="text/javascript">
 $(document).ready(function() {
   $('table#tutors').dataTable({
-      "bProcessing": true,
-      "sAjaxSource": "{% url tutors.views.tutors_json "available" %}",
-      "fnDrawCallback": function(oSettings) {
-          tutorEditHandlers("{% url tutors.views.edit_tutor %}");
-      }
+    "bProcessing": true,
+    "sAjaxSource": "{% url tutors.views.tutors_json "available" %}",
+    "fnDrawCallback": function(oSettings) {
+      $('.dataTables_filter').after('<br/>');
+      tutorEditHandlers("{% url tutors.views.edit_tutor %}");
+    }
   });
-  $('#selection').buttonset();
+
   $('#tutors-nav').addClass('selected');
-});
-
-$('#all-tutors').click(function() {
-    dataTable = $('table#tutors').dataTable().
-      fnReloadAjax('{% url tutors.views.tutors_json "all" %}');
+  $('.crumbs a').click(function() {
+    $('.crumbs a').removeClass('selected');
+    $('table#tutors').dataTable().fnReloadAjax($(this).attr('href'));
+    $(this).addClass('selected');
     return false;
-});
-
-$('#available-tutors').click(function() {
-    dataTable = $('table#tutors').dataTable().
-    fnReloadAjax('{% url tutors.views.tutors_json "available" %}');
-    return false;
-});
-
-$('#unavailable-tutors').click(function() {
-    dataTable = $('table#tutors').dataTable().
-    fnReloadAjax('{% url tutors.views.tutors_json "unavailable" %}');
-    return false;
-});
-
-$('#hidden-tutors').click(function() {
-    dataTable = $('table#tutors').dataTable().
-    fnReloadAjax('{% url tutors.views.tutors_json "hidden" %}');
-    return false;
+  });
 });
 
 </script>

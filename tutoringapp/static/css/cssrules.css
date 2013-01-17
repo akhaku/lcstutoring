@@ -7,7 +7,8 @@ html, body {margin: 0px; padding: 0px; height: 100%; }
 
 body {
     font-family: Helvetica, Arial;
-    background-color: #0A0A2A;
+    background: url('../img/bg-img.jpg') repeat;
+    background-size: 254px 254px;
     font-size: 17px;
 }
 
@@ -42,7 +43,26 @@ div#header {
 }
 
 div#content {
-  padding: 10px;
+  padding: 32px;
+}
+
+.link, .link:visited {
+  color: #04B404;
+  text-decoration: none;
+}
+.link:hover, .link:active {
+  color: #01DF01;
+  text-decoration: underline;
+}
+
+.crumbs a {
+  text-decoration: none;
+  font-size: 15px;
+  color: #0B610B;
+}
+
+.crumbs a.selected {
+  color: #0B1907;
 }
 
 .rounded-10 {
@@ -123,11 +143,11 @@ ul.errorlist li { float: left; font-size: 12px; color: #8A0808; }
 
 form input, form textarea {
     font-size: 15px;
-    padding: 2px;
+    padding: 4px;
     font-family: Helvetica, Arial;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
 }
 
 form input[type="submit"] {
@@ -180,9 +200,39 @@ form#login-form {
     margin-top: 50px;
 }
 
-table.data { width: 100%; }
-table.data th { cursor: pointer; }
-table.data td { font-size: 12px;}
+table.data {
+  width: 100%;
+  border-collapse: collapse;
+}
+table.data th {
+  cursor: pointer;
+  font-weight: normal;
+  color: #0B3B17;
+  font-size: 14px;
+  border-bottom: 2px solid #848484;
+}
+
+table.data tr.even {
+  background-color: rgba(0, 225, 15, 0.09);
+  border-top: 1px solid #848484;
+}
+
+table.data tr.odd {
+  background-color: rgba(0, 217, 215, 0.03);
+  border-top: 1px solid #848484;
+}
+
+table.data tr td {
+  font-size: 12px;
+  padding: 4px;
+  color: #2E2E2E;
+  background-color: transparent !important;
+}
+
+table.data tr:first-child {
+  border-top-color: transparent;
+}
+
 table.data td:last-child {
     display: block;
     overflow: hidden;

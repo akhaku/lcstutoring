@@ -1,17 +1,13 @@
 {% extends "base.html" %}
 {% block body %}
-<div id="selection" class="radio-buttons">
-    <input type="radio" id="available-tutees" checked="checked" name="radio" />
-    <label for="available-tutees">Available</label>
-
-    <input type="radio" id="unavailable-tutees" name="radio" />
-    <label for="unavailable-tutees">Unavailable</label>
-
-    <input type="radio" id="all-tutees" name="radio" />
-    <label for="all-tutees">All</label>
-
-    <input type="radio" id="hidden-tutees" name="radio" />
-    <label for="hidden-tutees">Hidden</label>
+<div class="crumbs">
+  <a href="{% url tutees.views.tutees_json "available" %}" class="selected">Available</a>
+  &#124;
+  <a href="{% url tutees.views.tutees_json "unavailable" %}">Unavailable</a>
+  &#124;
+  <a href="{% url tutees.views.tutees_json "all" %}">All</a>
+  &#124;
+  <a href="{% url tutees.views.tutees_json "hidden" %}">Hidden</a>
 </div>
 
 <table id="tutees" class="data">
@@ -19,8 +15,6 @@
         <tr>
             <th>Name</th>
             <th>Parent</th>
-            <th>Home</th>
-            <th>Cell</th>
             <th>Email</th>
             <th>Gender</th>
             <th>Grade</th>
@@ -37,39 +31,22 @@
 {% block extrascript %}
 <script type="text/javascript">
 $(document).ready(function() {
-    $('table#tutees').dataTable({
-        "bProcessing": true,
-        "sAjaxSource": "{% url tutees.views.tutees_json "available" %}",
-        "fnDrawCallback": function(oSettings) {
-            tuteeEditHandlers("{% url tutees.views.edit_tutee %}");
-        }
-    });
-    $('#tutees-nav').addClass('selected');
-    $('#selection').buttonset();
-});
+  $('table#tutees').dataTable({
+    "bProcessing": true,
+    "sAjaxSource": "{% url tutees.views.tutees_json "available" %}",
+    "fnDrawCallback": function(oSettings) {
+      $('.dataTables_filter').after('<br/>');
+      tuteeEditHandlers("{% url tutees.views.edit_tutee %}");
+    }
+  });
 
-$('#all-tutees').click(function() {
-        dataTable = $('table#tutees').dataTable().
-          fnReloadAjax('{% url tutees.views.tutees_json "all" %}');
-        return false;
-});
-
-$('#available-tutees').click(function() {
-        dataTable = $('table#tutees').dataTable().
-        fnReloadAjax('{% url tutees.views.tutees_json "available" %}');
-        return false;
-});
-
-$('#unavailable-tutees').click(function() {
-        dataTable = $('table#tutees').dataTable().
-        fnReloadAjax('{% url tutees.views.tutees_json "unavailable" %}');
-        return false;
-});
-
-$('#hidden-tutees').click(function() {
-        dataTable = $('table#tutees').dataTable().
-        fnReloadAjax('{% url tutees.views.tutees_json "hidden" %}');
-        return false;
+  $('#tutees-nav').addClass('selected');
+  $('.crumbs a').click(function() {
+    $('.crumbs a').removeClass('selected');
+    $('table#tutees').dataTable().fnReloadAjax($(this).attr('href'));
+    $(this).addClass('selected');
+    return false;
+  });
 });
 </script>
 {% endblock extrascript %}
