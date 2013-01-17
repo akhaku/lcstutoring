@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -32,6 +33,21 @@ def auth(request):
         messages.error(request, "Could not log you in as %s" % username)
     return HttpResponseRedirect("%s?%s" % (reverse('account.views.login_page',
         args=[]), urlencode(dict(next=redirect_to)) ) )
+
+def change_password(request):
+    if not request.user.check_password(request.REQUEST.get("currentPassword")):
+        messages.error(request, "Incorrect password")
+    elif request.REQUEST.get("newPassword") != \
+            request.REQUEST.get("newPasswordVerification"):
+        messages.error(request, "Passwords don't match")
+    elif len(request.REQUEST.get("newPassword")) < 3:
+        messages.error(request, "Password too short")
+    else:
+        u = User.objects.get(id=request.user.id)
+        u.set_password(request.REQUEST.get("newPassword"))
+        u.save()
+        messages.success(request, "Successfully changed password")
+    return HttpResponseRedirect(reverse('account.views.home_page', args=[]))
 
 def logout_page(request):
     logout(request)

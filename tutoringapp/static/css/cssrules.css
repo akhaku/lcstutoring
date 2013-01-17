@@ -130,6 +130,10 @@ form input, form textarea {
     -webkit-border-radius: 5px;
 }
 
+form input[type="submit"] {
+  padding: 4px;
+}
+
 .form-but {
     font-size: 20px;
     padding: 5px;

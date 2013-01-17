@@ -29,6 +29,9 @@
             {% if user.is_authenticated %}
             <ul id="nav">
                 <li>
+                    <a href="{% url account.views.home_page %}" id="dashboard-nav">Dashboard</a>
+                </li>
+                <li>
                     <a href="{% url tutors.views.all_tutors %}" id="tutors-nav">Tutors</a>
                 </li>
                 <li>

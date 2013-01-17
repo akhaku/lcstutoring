@@ -1,11 +1,44 @@
 {% extends "base.html" %}
 {% block body %}
 Welcome {{user.first_name}}
+<div class="summary-container">
+  <h3>Summary</h3>
+  <div>Summary goes here</div>
+</div>
+<div class="notifications-container">
+  <h3>Notifications</h3>
 <div id="all-notifs"></div>
+</div>
+<form action="{% url account.views.change_password %}" method="post">
+  <div>
+    <label for="currentPassword">Current password </label>
+    <input type="password" name="currentPassword"/>
+  </div>
+  <div>
+    <label for="newPassword">New Password</label> 
+    <input type="password" name="newPassword"/>
+  </div>
+  <div>
+    <label for="newPasswordVerification">Verify password</label> 
+    <input type="password" name="newPasswordVerification"/>
+  </div>
+  {% csrf_token %}
+  <input type="submit" value="Change password"/>
+</form>
+<br/>
+<h3>TODO</h3>
+<ul>
+  <li>Change password</li>
+  <li>Add user</li>
+  <li>Summaries</li>
+</ul>
 {% endblock body %}
 
 {% block extrascript %}
 <script type="text/javascript">
-  $('#all-notifs').load("{% url notification.views.view_notifications 0 %}");
+  $(document).ready(function() {
+    $('#dashboard-nav').addClass('selected');
+    $('#all-notifs').load("{% url notification.views.view_notifications 0 %}");
+  });
 </script>
 {% endblock extrascript %}
